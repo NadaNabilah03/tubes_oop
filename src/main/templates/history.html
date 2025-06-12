@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrashGo - History</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/mobile.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/history.css" />
+    <script src="js/auth.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <h1>Trash<span>Go</span></h1>
+        </div>
+        <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <nav id="mobileNav">
+          <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="history.html" class="active">History</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="admin-dashboard.html">Admin</a></li>
+            <li><a href="login.html">Logout</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="history-section">
+      <div class="container">
+        <h2>History</h2>
+
+        <div class="history-container">
+          <div class="history-item">
+            <div class="history-date">
+              <div class="date">12</div>
+              <div class="month">May</div>
+            </div>
+            <div class="history-content">
+              <div class="history-info">
+                <h3>Pick Up</h3>
+                <p class="address">Jalan Sudirman No. 123, Jakarta</p>
+                <div class="details">
+                  <span class="weight">5 Kg</span>
+                  <span class="dot">•</span>
+                  <span class="type">Organik</span>
+                  <span class="dot">•</span>
+                  <span class="time">08:00</span>
+                </div>
+              </div>
+              <div class="history-status">
+                <div class="status-badge completed">Completed</div>
+                <div class="price">Rp 25.000</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="history-item">
+            <div class="history-date">
+              <div class="date">10</div>
+              <div class="month">May</div>
+            </div>
+            <div class="history-content">
+              <div class="history-info">
+                <h3>Pick Up</h3>
+                <p class="address">Jalan Gatot Subroto No. 45, Jakarta</p>
+                <div class="details">
+                  <span class="weight">3 Kg</span>
+                  <span class="dot">•</span>
+                  <span class="type">Non-organik</span>
+                  <span class="dot">•</span>
+                  <span class="time">10:30</span>
+                </div>
+              </div>
+              <div class="history-status">
+                <div class="status-badge completed">Completed</div>
+                <div class="price">Rp 18.000</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="history-item">
+            <div class="history-date">
+              <div class="date">5</div>
+              <div class="month">May</div>
+            </div>
+            <div class="history-content">
+              <div class="history-info">
+                <h3>Pick Up</h3>
+                <p class="address">Jalan Thamrin No. 88, Jakarta</p>
+                <div class="details">
+                  <span class="weight">7 Kg</span>
+                  <span class="dot">•</span>
+                  <span class="type">Organik</span>
+                  <span class="dot">•</span>
+                  <span class="time">09:15</span>
+                </div>
+              </div>
+              <div class="history-status">
+                <div class="status-badge cancelled">Cancelled</div>
+                <div class="price">Rp 35.000</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="history-item">
+            <div class="history-date">
+              <div class="date">28</div>
+              <div class="month">Apr</div>
+            </div>
+            <div class="history-content">
+              <div class="history-info">
+                <h3>Pick Up</h3>
+                <p class="address">Jalan Kuningan No. 56, Jakarta</p>
+                <div class="details">
+                  <span class="weight">4 Kg</span>
+                  <span class="dot">•</span>
+                  <span class="type">Non-organik</span>
+                  <span class="dot">•</span>
+                  <span class="time">15:45</span>
+                </div>
+              </div>
+              <div class="history-status">
+                <div class="status-badge completed">Completed</div>
+                <div class="price">Rp 20.000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2023 TrashGo. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Check authentication when page loads
+      checkAuth();
+    </script>
+  </body>
+</html>
