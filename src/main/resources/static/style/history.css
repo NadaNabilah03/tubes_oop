@@ -1,0 +1,142 @@
+/* History Page Styles */
+.history-section {
+  padding: 40px 0 200px;
+}
+
+.history-section h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.history-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.history-item {
+  background-color: rgba(0, 105, 92, 0.7);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.history-date {
+  background-color: #004d40;
+  border-radius: 10px;
+  width: 60px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+
+.history-date .date {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.history-date .month {
+  font-size: 14px;
+  margin-top: 3px;
+}
+
+.history-content {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.history-info h3 {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.history-info .address {
+  color: #e0e0e0;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.history-info .details {
+  display: flex;
+  align-items: center;
+  color: #e0e0e0;
+  font-size: 14px;
+}
+
+.details .dot {
+  margin: 0 8px;
+  color: #ffa000;
+}
+
+.history-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.status-badge {
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.status-badge.completed {
+  background-color: rgba(76, 175, 80, 0.2);
+  color: #4caf50;
+}
+
+.status-badge.cancelled {
+  background-color: rgba(244, 67, 54, 0.2);
+  color: #f44336;
+}
+
+.price {
+  font-weight: 600;
+  font-size: 16px;
+  color: #ffa000;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .history-item {
+    flex-direction: column;
+  }
+
+  .history-date {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    flex-direction: row;
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .history-date .date {
+    margin-right: 5px;
+  }
+
+  .history-content {
+    flex-direction: column;
+  }
+
+  .history-info {
+    margin-bottom: 15px;
+  }
+
+  .history-status {
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+}

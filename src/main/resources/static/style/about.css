@@ -1,0 +1,80 @@
+/* About Us Page Styles */
+
+/* Hero Section */
+.hero-about {
+  width: 100%;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-image-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.hero-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 77, 64, 0.3), rgba(0, 77, 64, 0.7));
+}
+
+/* About Content */
+.about-content {
+  padding: 80px 0;
+  background-color: #004d40;
+  position: relative;
+}
+
+.about-content h1 {
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #fff;
+}
+
+.about-description {
+  max-width: 800px;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.about-description p {
+  margin-bottom: 25px;
+  font-size: 16px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .hero-about {
+    height: 300px;
+  }
+
+  .about-content {
+    padding: 60px 0;
+  }
+
+  .about-content h1 {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+
+  .about-description p {
+    font-size: 15px;
+    line-height: 1.6;
+    text-align: left;
+  }
+}

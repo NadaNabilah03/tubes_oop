@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrashGo - Waste Collection Service</title>
+
+    <!-- CSS lokal -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/mobile.css}" />
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- JS lokal -->
+    <script th:src="@{/js/auth.js}"></script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <h1>Trash<span>Go</span></h1>
+        </div>
+        <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </div>
+        <nav id="mobileNav">
+          <ul>
+            <li><a th:href="@{/home}" class="active">Home</a></li>
+            <li><a th:href="@{/history}">History</a></li>
+            <li><a th:href="@{/about}">About Us</a></li>
+            <li><a th:href="@{/profile}">Profile</a></li>
+            <li><a th:href="@{/admin-dashboard}">Admin</a></li>
+            <li><a th:href="@{/login}">Logout</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <div class="order-badge">Order</div>
+            <h2>Welcome Back!</h2>
+            <h3>Greening the Earth, <span>One Pickup at a Time</span></h3>
+            <p>
+              We're dedicated to making your surroundings cleaner with fast and
+              free waste collection, contributing to a greener, healthier planet
+            </p>
+            <a th:href="@{/form}">
+              <button class="btn-primary">Get Started</button>
+            </a>
+          </div>
+          <div class="hero-image">
+            <img th:src="@{/images/trash-collection.jpg}" alt="People collecting trash" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services">
+      <div class="container">
+        <h2>Our Services</h2>
+        <div class="service-cards">
+          <a th:href="@{/history}" class="service-card-link">
+            <div class="service-card">
+              <div class="card-image">
+                <img th:src="@{/images/history-home.png}" alt="History" />
+              </div>
+              <h3>History</h3>
+              <p style="width: 200px">
+                You only need a few steps in ordering food
+              </p>
+            </div>
+          </a>
+          <a th:href="@{/form}" class="service-card-link">
+            <div class="service-card">
+              <div class="card-image">
+                <img th:src="@{/images/pickup-home.png}" alt="Pick Up" />
+              </div>
+              <h3>Pick Up</h3>
+              <p style="width: 200px">
+                Delivery time is always ontime even faster
+              </p>
+            </div>
+          </a>
+          <a th:href="@{/about}" class="service-card-link">
+            <div class="service-card">
+              <div class="card-image">
+                <img th:src="@{/images/about-home.png}" alt="About Us" />
+              </div>
+              <h3>About US</h3>
+              <p>Not only fast for us quality is also number one</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2023 TrashGo. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      checkAuth();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrashGo - Form Pick Up</title>
+
+    <!-- Koneksi CSS dari folder static -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/mobile.css}" />
+    <link rel="stylesheet" th:href="@{/css/form.css}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Koneksi JS dari folder static -->
+    <script th:src="@{/js/auth.js}"></script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <h1>Trash<span>Go</span></h1>
+        </div>
+        <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </div>
+        <nav id="mobileNav">
+          <ul>
+            <li><a th:href="@{/home}">Home</a></li>
+            <li><a th:href="@{/history}">History</a></li>
+            <li><a th:href="@{/about}">About Us</a></li>
+            <li><a th:href="@{/profile}">Profile</a></li>
+            <li><a th:href="@{/admin-dashboard}">Admin</a></li>
+            <li><a th:href="@{/login}">Logout</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="form-section">
+      <div class="container">
+        <h2>Form pick up</h2>
+
+        <div class="form-container">
+          <form id="pickupForm">
+            <div class="form-group">
+              <label for="nama">Nama</label>
+              <input type="text" id="nama" name="nama" required />
+            </div>
+
+            <div class="form-group">
+              <label for="telpon">Nomor telpon</label>
+              <input type="tel" id="telpon" name="telpon" required />
+            </div>
+
+            <div class="form-group">
+              <label for="alamat">Alamat</label>
+              <input type="text" id="alamat" name="alamat" required />
+            </div>
+
+            <div class="form-group">
+              <label>Jenis sampah</label>
+              <div class="radio-group">
+                <div class="radio-option">
+                  <input
+                    type="radio"
+                    id="organik"
+                    name="jenis_sampah"
+                    value="organik"
+                    checked
+                  />
+                  <label for="organik">Organik</label>
+                </div>
+                <div class="radio-option">
+                  <input
+                    type="radio"
+                    id="non-organik"
+                    name="jenis_sampah"
+                    value="non-organik"
+                  />
+                  <label for="non-organik">Non-organik</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Masukkan berat sampah</label>
+              <div class="weight-price-group">
+                <input
+                  type="number"
+                  id="berat"
+                  name="berat"
+                  placeholder="Kg"
+                  required
+                />
+                <div class="arrow-icon">→</div>
+                <input
+                  type="text"
+                  id="harga"
+                  name="harga"
+                  placeholder="Rp"
+                  readonly
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="date-group">
+                <div class="date-field">
+                  <label for="tanggal">Tanggal</label>
+                  <input
+                    type="text"
+                    id="tanggal"
+                    name="tanggal"
+                    placeholder="dd"
+                    required
+                  />
+                </div>
+                <div class="date-separator">/</div>
+                <div class="date-field">
+                  <label for="bulan">Bulan</label>
+                  <input
+                    type="text"
+                    id="bulan"
+                    name="bulan"
+                    placeholder="mm"
+                    required
+                  />
+                </div>
+                <div class="date-separator">/</div>
+                <div class="date-field">
+                  <label for="tahun">Tahun</label>
+                  <input
+                    type="text"
+                    id="tahun"
+                    name="tahun"
+                    placeholder="yy"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="jam">Masukkan jam pick up</label>
+              <input type="time" id="jam" name="jam" required />
+            </div>
+
+            <div class="form-submit">
+              <button type="submit" class="btn-submit">Send</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2023 TrashGo. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Kalkulasi berat ke harga otomatis
+      document.getElementById("berat").addEventListener("input", function () {
+        const weight = parseFloat(this.value) || 0;
+        const price = weight * 5000;
+        document.getElementById("harga").value =
+          price > 0 ? price.toLocaleString("id-ID") : "";
+      });
+
+      checkAuth(); // Cek login dari auth.js
+    </script>
+  </body>
+</html>
