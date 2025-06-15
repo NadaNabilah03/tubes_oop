@@ -1,16 +1,29 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+=======
+<html lang="en">
+>>>>>>> 91f24e28f179339d6805b090435767b894ba3a26
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TrashGo - Login</title>
+<<<<<<< HEAD
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <link rel="stylesheet" th:href="@{/css/mobile.css}" />
+=======
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/mobile.css" />
+>>>>>>> 91f24e28f179339d6805b090435767b894ba3a26
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+<<<<<<< HEAD
     <link rel="stylesheet" th:href="@{/css/auth.css}" />
+=======
+    <link rel="stylesheet" href="css/auth.css" />
+>>>>>>> 91f24e28f179339d6805b090435767b894ba3a26
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -65,10 +78,14 @@
         </form>
 
         <div class="auth-footer">
+<<<<<<< HEAD
           <p>
             Didn't have an Account!? 
             <a th:href="@{/register}">Sign-up</a>
           </p>
+=======
+          <p>Didn't have an Account!? <a href="register.html">Sign-up</a></p>
+>>>>>>> 91f24e28f179339d6805b090435767b894ba3a26
         </div>
       </div>
     </div>
@@ -101,12 +118,23 @@
           const email = document.getElementById("email").value;
           const password = document.getElementById("password").value;
 
+<<<<<<< HEAD
           if (email && password) {
             localStorage.setItem("isLoggedIn", "true");
             localStorage.setItem("userEmail", email);
 
             // Redirect ke home path Thymeleaf
             window.location.href = "/home";
+=======
+          // Simple validation - dalam implementasi nyata, ini harus menggunakan backend
+          if (email && password) {
+            // Simpan status login di localStorage
+            localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("userEmail", email);
+
+            // Redirect ke home.html
+            window.location.href = "home.html";
+>>>>>>> 91f24e28f179339d6805b090435767b894ba3a26
           } else {
             alert("Please fill in all fields");
           }

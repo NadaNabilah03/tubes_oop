@@ -1,9 +1,14 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+=======
+<html lang="en">
+>>>>>>> 91f24e28f179339d6805b090435767b894ba3a26
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TrashGo - Admin Dashboard</title>
+<<<<<<< HEAD
     <link th:href="@{/css/style.css}" rel="stylesheet" />
     <link th:href="@{/css/mobile.css}" rel="stylesheet" />
     <link th:href="@{/css/admin.css}" rel="stylesheet" />
@@ -12,10 +17,23 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+=======
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/mobile.css" />
+>>>>>>> 91f24e28f179339d6805b090435767b894ba3a26
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+<<<<<<< HEAD
+=======
+    <link rel="stylesheet" href="css/admin.css" />
+    <script src="js/auth.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+>>>>>>> 91f24e28f179339d6805b090435767b894ba3a26
   </head>
   <body>
     <header>
@@ -30,12 +48,21 @@
         </div>
         <nav id="mobileNav">
           <ul>
+<<<<<<< HEAD
             <li><a th:href="@{/home}">Home</a></li>
             <li><a th:href="@{/history}">History</a></li>
             <li><a th:href="@{/about}">About Us</a></li>
             <li><a th:href="@{/profile}">Profile</a></li>
             <li><a th:href="@{/admin-dashboard}" class="active">Admin</a></li>
             <li><a th:href="@{/login}">Logout</a></li>
+=======
+            <li><a href="home.html">Home</a></li>
+            <li><a href="history.html">History</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="admin-dashboard.html" class="active">Admin</a></li>
+            <li><a href="login.html">Logout</a></li>
+>>>>>>> 91f24e28f179339d6805b090435767b894ba3a26
           </ul>
         </nav>
       </div>
@@ -231,7 +258,13 @@
       // Status change functionality
       document.querySelectorAll(".status-select").forEach((select) => {
         select.addEventListener("change", function () {
+<<<<<<< HEAD
           this.classList.remove("ongoing", "done", "cancelled");
+=======
+          // Remove all status classes
+          this.classList.remove("ongoing", "done", "cancelled");
+          // Add the selected status class
+>>>>>>> 91f24e28f179339d6805b090435767b894ba3a26
           this.classList.add(this.value);
         });
       });

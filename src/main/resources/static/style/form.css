@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Form Styles */
 .form-section {
   padding: 40px 0 80px;
@@ -175,3 +176,182 @@
     text-align: center;
   }
 }
+=======
+/* Form Styles */
+.form-section {
+  padding: 40px 0 80px;
+}
+
+.form-section h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.form-container {
+  background-color: rgba(0, 105, 92, 0.8);
+  border-radius: 15px;
+  padding: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="number"],
+.form-group input[type="time"] {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Radio buttons styling */
+.radio-group {
+  display: flex;
+  gap: 30px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+}
+
+.radio-option input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  margin-right: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.radio-option input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.radio-option label {
+  display: inline;
+  margin: 0;
+}
+
+/* Weight and price inputs */
+.weight-price-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.weight-price-group input {
+  flex: 1;
+}
+
+.arrow-icon {
+  background-color: #ffa000;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+/* Date inputs */
+.date-group {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+.date-field {
+  flex: 1;
+}
+
+.date-separator {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Submit button */
+.form-submit {
+  text-align: right;
+  margin-top: 40px;
+}
+
+.btn-submit {
+  background-color: #ffa000;
+  color: #fff;
+  border: none;
+  padding: 12px 40px;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+  background-color: #f57c00;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 30px 20px;
+  }
+
+  .radio-group {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .weight-price-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .arrow-icon {
+    margin: 0 auto;
+    transform: rotate(90deg);
+  }
+
+  .date-group {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .date-separator {
+    display: none;
+  }
+
+  .form-submit {
+    text-align: center;
+  }
+}
+>>>>>>> 91f24e28f179339d6805b090435767b894ba3a26
