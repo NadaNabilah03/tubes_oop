@@ -3,6 +3,7 @@ package com.example.TubesOOP.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import com.example.TubesOOP.enums.BookingStatus;
 
 @Entity
 @Table(name = "history_booking")
@@ -18,14 +19,18 @@ public class HistoryBooking {
     @NotNull(message = "Jenis sampah tidak boleh kosong")
     private String jenisSampah;
 
+    @Column(nullable = false)
     @NotNull(message = "Berat sampah tidak boleh kosong")
     private Double beratSampah;
 
+    @Column(nullable = false)
     @NotNull(message = "Harga tidak boleh kosong")
     private Double harga;
 
+    @Enumerated(EnumType.STRING)
     @NotNull(message = "Status booking tidak boleh kosong")
-    private String status; // contoh: "Selesai", "Dibatalkan", dsb
+    private BookingStatus status;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
@@ -39,7 +44,7 @@ public class HistoryBooking {
     }
 
     public HistoryBooking(LocalDateTime tanggalBooking, String jenisSampah,
-                          Double beratSampah, Double harga, String status, Customer customer) {
+                          Double beratSampah, Double harga, BookingStatus status, Customer customer) {
         this.tanggalBooking = tanggalBooking;
         this.jenisSampah = jenisSampah;
         this.beratSampah = beratSampah;
@@ -90,11 +95,11 @@ public class HistoryBooking {
         this.harga = harga;
     }
 
-    public String getStatus() {
+    public BookingStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(BookingStatus status) {
         this.status = status;
     }
 

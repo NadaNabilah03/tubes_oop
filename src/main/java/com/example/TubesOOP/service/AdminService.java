@@ -1,4 +1,4 @@
-public package com.example.TubesOOP.service;
+package com.example.TubesOOP.service;
 
 import com.example.TubesOOP.entity.Admin;
 import com.example.TubesOOP.repository.AdminRepository;
@@ -63,7 +63,4 @@ public class AdminService {
 
         repository.save(newAdmin);
     }
-}
- {
-    
 }

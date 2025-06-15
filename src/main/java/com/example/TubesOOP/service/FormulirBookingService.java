@@ -44,7 +44,7 @@ public class FormulirBookingService {
         booking.setHarga(harga);
         booking.setTanggalPickup(tanggalPickup);
         booking.setJamPickup(jamPickup);
-        booking.setStatus(BookingStatus.PENDING);
+        booking.setStatus(BookingStatus.MENUNGGU);
         booking.setCustomer(customer.get());
 
         bookingRepository.save(booking);
@@ -68,7 +68,7 @@ public class FormulirBookingService {
                 .orElseThrow(() -> new Exception("assignCollector.Collector not found"));
 
         booking.setCollector(collector);
-        booking.setStatus(BookingStatus.ASSIGNED);
+        booking.setStatus(BookingStatus.DIPROSES);
 
         bookingRepository.save(booking);
     }
@@ -76,7 +76,19 @@ public class FormulirBookingService {
     // Ubah status booking menjadi COMPLETED
     public void completeBooking(Long bookingId) throws Exception {
         FormulirBooking booking = getBookingById(bookingId);
-        booking.setStatus(BookingStatus.COMPLETED);
+        booking.setStatus(BookingStatus.SELESAI);
+        bookingRepository.save(booking);
+    }
+
+    // Membatalkan booking
+    public void cancelBooking(Long bookingId) throws Exception {
+        FormulirBooking booking = getBookingById(bookingId);
+
+        if (booking.getStatus() == BookingStatus.SELESAI || booking.getStatus() == BookingStatus.DIPROSES) {
+            throw new Exception("cancelBooking.Booking tidak bisa dibatalkan karena sedang diproses atau sudah selesai.");
+        }
+
+        booking.setStatus(BookingStatus.DIBATALKAN);
         bookingRepository.save(booking);
     }
 
@@ -89,12 +101,17 @@ public class FormulirBookingService {
     }
 
     // Daftar booking berdasarkan customer ID
-    public List<FormulirBooking> getBookingsByCustomerId(Long customerId) {
-        return bookingRepository.findByCustomerId(customerId);
+    public List<FormulirBooking> getBookingsByCustomerId(Long customerId) throws Exception {
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new Exception("getBookingsByCustomerId.Customer not found"));
+        return bookingRepository.findByCustomer(customer);
     }
 
     // Daftar booking berdasarkan collector ID
-    public List<FormulirBooking> getBookingsByCollectorId(Long collectorId) {
-        return bookingRepository.findByCollectorId(collectorId);
+    public List<FormulirBooking> getBookingsByCollectorId(Long collectorId) throws Exception {
+        Collector collector = collectorRepository.findById(collectorId)
+                .orElseThrow(() -> new Exception("getBookingsByCollectorId.Collector not found"));
+        return bookingRepository.findByCollector(collector);
     }
+
 }

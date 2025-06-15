@@ -2,7 +2,7 @@ package com.example.TubesOOP.service;
 
 import com.example.TubesOOP.entity.Collector;
 import com.example.TubesOOP.repository.CollectorRepository;
-import com.example.TubesOOP.payload.CollectorInfoResponse;
+import com.example.TubesOOP.payload.CollectorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -60,8 +60,8 @@ public class CollectorService {
     }
 
     // Mengubah Collector ke bentuk response
-    public CollectorInfoResponse convertToResponse(Collector collector) {
-        return new CollectorInfoResponse(
+    public CollectorResponse convertToResponse(Collector collector) {
+        return new CollectorResponse(
                 collector.getId(),
                 collector.getName(),
                 collector.getEmail(),
