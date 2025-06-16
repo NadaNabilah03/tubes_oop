@@ -28,6 +28,11 @@ public class CustomerController {
         }
     }
 
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "login";
+    }
+
     @PostMapping("/register")
     public String registerCustomer(@RequestBody CustomerRegisterRequest request) {
         try {
@@ -36,6 +41,11 @@ public class CustomerController {
         } catch (Exception e) {
             return "redirect:/register?error";
         }
+    }
+
+    @GetMapping("/register")
+    public String showRegisterForm() {
+        return "register";
     }
 
     @GetMapping("/{username}")

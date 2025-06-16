@@ -25,13 +25,8 @@ public class BookingService {
 
     // Contoh method simpan booking (misal nanti pake repository)
     public FormulirBooking simpanBooking(FormulirBooking booking) {
-        // Hitung harga dulu
+
         hitungHarga(booking);
-
-        // Simpan ke DB, misal pake repository.save(booking)
-        // return bookingRepository.save(booking);
-
-        // Sementara ini return booking aja supaya bisa coba dulu
         return booking;
     }
 }

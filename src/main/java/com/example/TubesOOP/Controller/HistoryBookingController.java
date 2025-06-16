@@ -3,6 +3,7 @@ package com.example.TubesOOP.Controller;
 import com.example.TubesOOP.service.FormulirBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -12,23 +13,27 @@ public class HistoryBookingController {
     @Autowired
     private FormulirBookingService bookingService;
 
+    // Customer melihat history-nya
     @GetMapping("/customer/{customerId}")
-    public String getCustomerHistory(@PathVariable Long customerId) {
+    public String getCustomerHistory(@PathVariable Long customerId, Model model) {
         try {
-            bookingService.getBookingsByCustomerId(customerId);
-            return "redirect:/history"; // Halaman history customer
+            model.addAttribute("bookings", bookingService.getBookingsByCustomerId(customerId));
+            return "booking-history"; // templates/booking-history.html
         } catch (Exception e) {
-            return "redirect:/history?error";
+            model.addAttribute("error", "Gagal mengambil data riwayat.");
+            return "booking-history";
         }
     }
 
+    // Collector melihat history-nya
     @GetMapping("/collector/{collectorId}")
-    public String getCollectorHistory(@PathVariable Long collectorId) {
+    public String getCollectorHistory(@PathVariable Long collectorId, Model model) {
         try {
-            bookingService.getBookingsByCollectorId(collectorId);
-            return "redirect:/collector/history"; // Halaman history collector
+            model.addAttribute("bookings", bookingService.getBookingsByCollectorId(collectorId));
+            return "collector-history"; // templates/collector-history.html
         } catch (Exception e) {
-            return "redirect:/collector/history?error";
+            model.addAttribute("error", "Gagal mengambil data riwayat.");
+            return "collector-history";
         }
     }
 }

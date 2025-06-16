@@ -29,6 +29,11 @@ public class CollectorController {
         }
     }
 
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "login";
+    }
+
     @PostMapping("/register")
     public String registerCollector(@RequestBody CollectorRegisterRequest request) {
         try {
@@ -47,6 +52,11 @@ public class CollectorController {
             // Registrasi gagal, kembali ke register
             return "redirect:/register?error";
         }
+    }
+
+    @GetMapping("/register")
+    public String showRegisterForm() {
+        return "register";
     }
 
     @GetMapping("/{email}")

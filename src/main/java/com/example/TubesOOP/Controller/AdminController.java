@@ -19,11 +19,16 @@ public class AdminController {
     public String loginAdmin(@RequestBody AdminLoginRequest request) {
         try {
             Admin admin = adminService.authenticateAdmin(request.getEmail(), request.getPassword());
-            // Simpan session/cookie jika perlu
+
             return "redirect:/admin-dashboard";
         } catch (Exception e) {
             return "redirect:/login?error";
         }
+    }
+
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "login";
     }
 
     @PostMapping("/register")
@@ -36,10 +41,14 @@ public class AdminController {
         }
     }
 
+    @GetMapping("/register")
+    public String showRegisterForm() {
+        return "register";
+    }
+
     @GetMapping("/{email}")
     public String getAdminInfo(@PathVariable String email) {
         try {
-            // Biasanya ini return view atau redirect — untuk sekarang redirect ke profile
             return "redirect:/profile";
         } catch (Exception e) {
             return "redirect:/error";

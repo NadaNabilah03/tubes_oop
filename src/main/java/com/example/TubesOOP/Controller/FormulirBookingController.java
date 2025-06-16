@@ -4,13 +4,15 @@ import com.example.TubesOOP.enums.WasteType;
 import com.example.TubesOOP.enums.BookingStatus;
 import com.example.TubesOOP.service.FormulirBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@RestController
-@RequestMapping("/api/booking")
+@Controller
+@RequestMapping("/booking")
+
 public class FormulirBookingController {
 
     @Autowired
@@ -110,4 +112,10 @@ public class FormulirBookingController {
             return "redirect:/history?error";
         }
     }
+
+    @GetMapping("/form")
+    public String showBookingForm() {
+        return "form";
+    }
+
 }
