@@ -1,6 +1,7 @@
 package com.example.TubesOOP.entity;
 
 import com.example.TubesOOP.enums.BookingStatus;
+import com.example.TubesOOP.enums.WasteType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
@@ -18,8 +19,9 @@ public class FormulirBooking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Jenis sampah tidak boleh kosong")
-    private String jenisSampah;
+    @Enumerated(EnumType.STRING)
+    private WasteType jenisSampah;
+
 
     @DecimalMin(value = "0.1", message = "Berat sampah minimal 0.1 kg")
     private Double beratSampah;
@@ -54,7 +56,7 @@ public class FormulirBooking {
     public FormulirBooking() {
     }
 
-    public FormulirBooking(String jenisSampah, Double beratSampah, Double harga,
+    public FormulirBooking(WasteType jenisSampah, Double beratSampah, Double harga,
                            LocalDate tanggalPickup, LocalTime jamPickup,
                            BookingStatus status, Customer customer, Collector collector) {
         this.jenisSampah = jenisSampah;
@@ -77,11 +79,11 @@ public class FormulirBooking {
         this.id = id;
     }
 
-    public String getJenisSampah() {
+    public WasteType getJenisSampah() {
         return jenisSampah;
     }
 
-    public void setJenisSampah(String jenisSampah) {
+    public void setJenisSampah(WasteType jenisSampah) {
         this.jenisSampah = jenisSampah;
     }
 

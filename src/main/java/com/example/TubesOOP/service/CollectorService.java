@@ -1,8 +1,8 @@
 package com.example.TubesOOP.service;
 
 import com.example.TubesOOP.entity.Collector;
-import com.example.TubesOOP.repository.CollectorRepository;
 import com.example.TubesOOP.payload.CollectorResponse;
+import com.example.TubesOOP.repository.CollectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,61 +14,62 @@ import java.util.Optional;
 public class CollectorService {
 
     @Autowired
-    private CollectorRepository repository;
+    private CollectorRepository collectorRepository;
 
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(16);
 
-    // Cari collector berdasarkan email
-    public Collector findCollectorByEmail(String email) throws Exception {
-        Optional<Collector> collector = repository.findByEmail(email);
+    public Collector authenticateCollector(String email, String password) throws Exception {
+        Optional<Collector> collector = collectorRepository.findByEmail(email);
         if (!collector.isPresent()) {
-            throw new Exception("findCollectorByEmail.Collector doesn't exist");
+            throw new Exception("Collector with this email does not exist");
+        }
+
+        if (!passwordEncoder.matches(password, collector.get().getPassword())) {
+            throw new Exception("Wrong password");
+        }
+
+        return collector.get();
+    }
+
+    public void registerCollector(String name, String username, String email, String password,
+                                  String phoneNumber, String address, String profilePic) throws Exception {
+        if (collectorRepository.existsByEmail(email)) {
+            throw new Exception("Email already used");
+        }
+
+        if (collectorRepository.existsByUsername(username)) {
+            throw new Exception("Username already used");
+        }
+
+        Collector collector = new Collector();
+        collector.setName(name);
+        collector.setEmail(email);
+        collector.setPassword(passwordEncoder.encode(password));
+        collector.setPhoneNumber(phoneNumber);
+        collector.setAddress(address);
+        collector.setProfilePic(profilePic);
+
+        collectorRepository.save(collector);
+    }
+
+    public Collector findCollectorByEmail(String email) throws Exception {
+        Optional<Collector> collector = collectorRepository.findByEmail(email);
+        if (!collector.isPresent()) {
+            throw new Exception("Collector with this email not found");
         }
         return collector.get();
     }
 
-    // Autentikasi login collector
-    public Collector authenticateCollector(String email, String password) throws Exception {
-        Optional<Collector> collector = repository.findByEmail(email);
-        if (!collector.isPresent()) {
-            throw new Exception("authenticateCollector.Collector doesn't exist");
-        }
-
-        if (passwordEncoder.matches(password, collector.get().getPassword())) {
-            return collector.get();
-        } else {
-            throw new Exception("authenticateCollector.Wrong password");
-        }
-    }
-
-    // Registrasi collector baru
-    public void registerCollector(String name, String email, String password, String phoneNumber, String address, String profilePic) throws Exception {
-        if (repository.existsByEmail(email)) {
-            throw new Exception("registerCollector.Email already used");
-        }
-
-        Collector newCollector = new Collector();
-        newCollector.setName(name);
-        newCollector.setEmail(email);
-        newCollector.setPassword(passwordEncoder.encode(password));
-        newCollector.setPhoneNumber(phoneNumber);
-        newCollector.setAddress(address);
-        newCollector.setProfilePic(profilePic);
-        newCollector.setActive(true);
-
-        repository.save(newCollector);
-    }
-
-    // Mengubah Collector ke bentuk response
     public CollectorResponse convertToResponse(Collector collector) {
-        return new CollectorResponse(
+        CollectorResponse response = new CollectorResponse(
                 collector.getId(),
                 collector.getName(),
                 collector.getEmail(),
-                collector.getPhoneNumber(),
                 collector.getAddress(),
-                collector.getProfilePic(),
+                collector.getPhoneNumber(),
                 collector.getActive()
         );
+        return response;
     }
+
 }

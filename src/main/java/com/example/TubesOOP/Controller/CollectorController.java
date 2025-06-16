@@ -1,7 +1,9 @@
-package com.example.TubesOOP.controller;
+package com.example.TubesOOP.Controller;
 
 import com.example.TubesOOP.entity.Collector;
-import com.example.TubesOOP.payload.CollectorInfoResponse;
+import com.example.TubesOOP.payload.CollectorLoginRequest;
+import com.example.TubesOOP.payload.CollectorRegisterRequest;
+import com.example.TubesOOP.payload.CollectorResponse;
 import com.example.TubesOOP.service.CollectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,45 +16,46 @@ public class CollectorController {
     @Autowired
     private CollectorService collectorService;
 
-    // Login Collector
     @PostMapping("/login")
-    public ResponseEntity<?> loginCollector(@RequestParam String email, @RequestParam String password) {
+    public ResponseEntity<?> loginCollector(@RequestBody CollectorLoginRequest request) {
         try {
-            Collector collector = collectorService.authenticateCollector(email, password);
-            CollectorInfoResponse response = collectorService.convertToResponse(collector);
+            Collector collector = collectorService.authenticateCollector(
+                    request.getEmail(), request.getPassword()
+            );
+            CollectorResponse response = collectorService.convertToResponse(collector);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    // Register Collector
     @PostMapping("/register")
-    public ResponseEntity<?> registerCollector(
-            @RequestParam String name,
-            @RequestParam String email,
-            @RequestParam String password,
-            @RequestParam String phoneNumber,
-            @RequestParam String address,
-            @RequestParam(required = false) String profilePic
-    ) {
+    public ResponseEntity<?> registerCollector(@RequestBody CollectorRegisterRequest request) {
         try {
-            collectorService.registerCollector(name, email, password, phoneNumber, address, profilePic);
+            collectorService.registerCollector(
+                    request.getName(),
+                    request.getUsername(),
+                    request.getEmail(),
+                    request.getPassword(),
+                    request.getPhoneNumber(),
+                    request.getAddress(),
+                    request.getProfilePic()
+            );
             return ResponseEntity.ok("Collector registered successfully");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    // Get Collector Info by Email
     @GetMapping("/{email}")
     public ResponseEntity<?> getCollectorInfo(@PathVariable String email) {
         try {
             Collector collector = collectorService.findCollectorByEmail(email);
-            CollectorInfoResponse response = collectorService.convertToResponse(collector);
+            CollectorResponse response = collectorService.convertToResponse(collector);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }
+

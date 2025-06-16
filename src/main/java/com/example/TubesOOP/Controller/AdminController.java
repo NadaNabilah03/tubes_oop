@@ -1,7 +1,9 @@
-package com.example.TubesOOP.controller;
+package com.example.TubesOOP.Controller;
 
 import com.example.TubesOOP.entity.Admin;
 import com.example.TubesOOP.payload.AdminInfoResponse;
+import com.example.TubesOOP.payload.AdminLoginRequest;
+import com.example.TubesOOP.payload.AdminRegisterRequest;
 import com.example.TubesOOP.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +16,10 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    // Login endpoint
     @PostMapping("/login")
-    public ResponseEntity<?> loginAdmin(@RequestParam String username, @RequestParam String password) {
+    public ResponseEntity<?> loginAdmin(@RequestBody AdminLoginRequest request) {
         try {
-            Admin admin = adminService.authenticateAdmin(username, password);
+            Admin admin = adminService.authenticateAdmin(request.getEmail(), request.getPassword());
             AdminInfoResponse response = adminService.convertToResponse(admin);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -26,26 +27,20 @@ public class AdminController {
         }
     }
 
-    // Register endpoint
     @PostMapping("/register")
-    public ResponseEntity<?> registerAdmin(
-            @RequestParam String username,
-            @RequestParam String email,
-            @RequestParam String password
-    ) {
+    public ResponseEntity<?> registerAdmin(@RequestBody AdminRegisterRequest request) {
         try {
-            adminService.registerAdmin(username, email, password);
+            adminService.registerAdmin(request.getUsername(), request.getEmail(), request.getPassword());
             return ResponseEntity.ok("Admin registered successfully");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    // Get admin info by username
-    @GetMapping("/{username}")
-    public ResponseEntity<?> getAdminInfo(@PathVariable String username) {
+    @GetMapping("/{email}")
+    public ResponseEntity<?> getAdminInfo(@PathVariable String email) {
         try {
-            Admin admin = adminService.findAdminByUsername(username);
+            Admin admin = adminService.findAdminByEmail(email);
             AdminInfoResponse response = adminService.convertToResponse(admin);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -53,3 +48,4 @@ public class AdminController {
         }
     }
 }
+

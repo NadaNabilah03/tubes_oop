@@ -6,16 +6,14 @@ public class CollectorResponse {
     private String email;
     private String alamat;
     private String noTelepon;
-    private String areaTugas;
     private boolean aktif;
 
-    public CollectorResponse(Long id, String nama, String email, String alamat, String noTelepon, String areaTugas, boolean aktif) {
+    public CollectorResponse(Long id, String nama, String email, String alamat, String noTelepon, boolean aktif) {
         this.id = id;
         this.nama = nama;
         this.email = email;
         this.alamat = alamat;
         this.noTelepon = noTelepon;
-        this.areaTugas = areaTugas;
         this.aktif = aktif;
     }
 
@@ -50,12 +48,7 @@ public class CollectorResponse {
     public void setNoTelepon(String noTelepon) {
         this.noTelepon = noTelepon;
     }
-    public String getAreaTugas() {
-        return areaTugas;
-    }
-    public void setAreaTugas(String areaTugas) {
-        this.areaTugas = areaTugas;
-    }
+
     public boolean isAktif() {
         return aktif;
     }

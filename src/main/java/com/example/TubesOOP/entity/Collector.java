@@ -27,6 +27,10 @@ public class Collector {
     @NotBlank(message = "Password tidak boleh kosong")
     private String password;
 
+    @NotBlank(message = "Username tidak boleh kosong")
+    @Column(unique = true)
+    private String username;
+
     @NotBlank(message = "Nomor HP tidak boleh kosong")
     private String phoneNumber;
 
@@ -136,4 +140,13 @@ public class Collector {
     public void setActive(Boolean active) {
         this.active = active;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 }
