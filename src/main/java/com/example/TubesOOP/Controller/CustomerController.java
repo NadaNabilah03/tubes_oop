@@ -6,7 +6,6 @@ import com.example.TubesOOP.payload.CustomerRegisterRequest;
 import com.example.TubesOOP.payload.CustomerResponse;
 import com.example.TubesOOP.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,36 +16,36 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginCustomer(@RequestBody CustomerLoginRequest request) {
+    public String loginCustomer(@RequestBody CustomerLoginRequest request) {
         try {
             Customer customer = customerService.authenticateCustomer(
                     request.getEmail(), request.getPassword()
             );
             CustomerResponse response = customerService.convertToResponse(customer);
-            return ResponseEntity.ok(response);
+            return "redirect:/home";
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return "redirect:/login?error";
         }
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerCustomer(@RequestBody CustomerRegisterRequest request) {
+    public String registerCustomer(@RequestBody CustomerRegisterRequest request) {
         try {
             customerService.registerCustomer(request.getUsername(), request.getEmail(), request.getPassword());
-            return ResponseEntity.ok("Customer registered successfully");
+            return "redirect:/login?registered";
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return "redirect:/register?error";
         }
     }
 
     @GetMapping("/{username}")
-    public ResponseEntity<?> getCustomerInfo(@PathVariable String username) {
+    public String getCustomerInfo(@PathVariable String username) {
         try {
             Customer customer = customerService.findCustomerByUsername(username);
             CustomerResponse response = customerService.convertToResponse(customer);
-            return ResponseEntity.ok(response);
+            return "redirect:/profile";
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return "redirect:/error";
         }
     }
 }

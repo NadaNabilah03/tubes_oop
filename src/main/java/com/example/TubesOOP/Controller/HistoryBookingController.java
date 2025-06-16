@@ -2,33 +2,33 @@ package com.example.TubesOOP.Controller;
 
 import com.example.TubesOOP.service.FormulirBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/api/history")
+@Controller
+@RequestMapping("/history")
 public class HistoryBookingController {
 
     @Autowired
     private FormulirBookingService bookingService;
 
-    // Ambil riwayat booking berdasarkan ID customer
     @GetMapping("/customer/{customerId}")
-    public ResponseEntity<?> getCustomerHistory(@PathVariable Long customerId) {
+    public String getCustomerHistory(@PathVariable Long customerId) {
         try {
-            return ResponseEntity.ok(bookingService.getBookingsByCustomerId(customerId));
+            bookingService.getBookingsByCustomerId(customerId);
+            return "redirect:/history"; // Halaman history customer
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+            return "redirect:/history?error";
         }
     }
 
-    // Ambil riwayat booking berdasarkan ID collector
     @GetMapping("/collector/{collectorId}")
-    public ResponseEntity<?> getCollectorHistory(@PathVariable Long collectorId) {
+    public String getCollectorHistory(@PathVariable Long collectorId) {
         try {
-            return ResponseEntity.ok(bookingService.getBookingsByCollectorId(collectorId));
+            bookingService.getBookingsByCollectorId(collectorId);
+            return "redirect:/collector/history"; // Halaman history collector
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+            return "redirect:/collector/history?error";
         }
     }
 }
