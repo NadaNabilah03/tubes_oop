@@ -1,182 +1,66 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-=======
-<html lang="en">
->>>>>>> 91f24e28f179339d6805b090435767b894ba3a26
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TrashGo - Profile</title>
-<<<<<<< HEAD
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
-    <link rel="stylesheet" th:href="@{/css/mobile.css}" />
-    <link rel="stylesheet" th:href="@{/css/profile.css}" />
-=======
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/mobile.css" />
->>>>>>> 91f24e28f179339d6805b090435767b894ba3a26
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-<<<<<<< HEAD
+
+    <!-- CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/mobile.css}" rel="stylesheet" />
+    <link th:href="@{/css/profile.css}" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- JS -->
     <script th:src="@{/js/auth.js}"></script>
-=======
-    <link rel="stylesheet" href="css/profile.css" />
-    <script src="js/auth.js"></script>
->>>>>>> 91f24e28f179339d6805b090435767b894ba3a26
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-  </head>
-  <body>
-    <header>
-      <div class="container">
+</head>
+
+<body>
+<!-- Header -->
+<header>
+    <div class="container">
         <div class="logo">
-          <h1>Trash<span>Go</span></h1>
+            <h1>Trash<span>Go</span></h1>
         </div>
         <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
         <nav id="mobileNav">
-          <ul>
-<<<<<<< HEAD
-            <li><a th:href="@{/home}">Home</a></li>
-            <li><a th:href="@{/history}">History</a></li>
-            <li><a th:href="@{/about}">About Us</a></li>
-            <li><a th:href="@{/profile}" class="active">Profile</a></li>
-            <li><a th:href="@{/admin}">Admin</a></li>
-            <li><a th:href="@{/login}">Logout</a></li>
-=======
-            <li><a href="home.html">Home</a></li>
-            <li><a href="history.html">History</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="profile.html" class="active">Profile</a></li>
-            <li><a href="admin-dashboard.html">Admin</a></li>
-            <li><a href="login.html">Logout</a></li>
->>>>>>> 91f24e28f179339d6805b090435767b894ba3a26
-          </ul>
+            <ul>
+                <li><a th:href="@{/home}">Home</a></li>
+                <li><a th:href="@{/history}">History</a></li>
+                <li><a th:href="@{/about}">About Us</a></li>
+                <li><a th:href="@{/profile}" class="active">Profile</a></li>
+                <li><a th:href="@{/admin-dashboard}">Admin</a></li>
+                <li><a th:href="@{/login}">Logout</a></li>
+            </ul>
         </nav>
-      </div>
-    </header>
+    </div>
+</header>
 
-    <section class="profile-section">
-      <div class="container">
+<!-- Profile Content -->
+<section class="profile-section">
+    <div class="container">
         <h2>Profile</h2>
-
         <div class="profile-container">
-          <div class="profile-header">
-            <div class="profile-avatar">
-<<<<<<< HEAD
-              <img th:src="@{/images/avatar.jpg}" alt="User Avatar" />
-=======
-              <img src="images/avatar.jpg" alt="User Avatar" />
->>>>>>> 91f24e28f179339d6805b090435767b894ba3a26
-            </div>
-            <div class="profile-info">
-              <h3>Rara Widyah</h3>
-              <p class="user-role">TrashGo Member</p>
-              <p class="user-since">Member since: May 2023</p>
-            </div>
-            <div class="edit-profile">
-              <button class="btn-edit">
-                <i class="fas fa-pencil-alt"></i> Edit Profile
-              </button>
-            </div>
-          </div>
-
-          <div class="profile-details">
-            <div class="profile-section-title">
-              <h4>Personal Information</h4>
-            </div>
-
-            <div class="profile-data">
-              <div class="data-row">
-                <div class="data-label">Full Name</div>
-                <div class="data-value">Rara Widyah</div>
-              </div>
-
-              <div class="data-row">
-                <div class="data-label">Email</div>
-                <div class="data-value">ainun@example.com</div>
-              </div>
-
-              <div class="data-row">
-                <div class="data-label">Phone</div>
-                <div class="data-value">+62 812-3456-7890</div>
-              </div>
-
-              <div class="data-row">
-                <div class="data-label">Address</div>
-                <div class="data-value">Jalan Sudirman No. 123, Jakarta</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="profile-stats">
-            <div class="profile-section-title">
-              <h4>Statistics</h4>
-            </div>
-
-            <div class="stats-container">
-              <div class="stat-card">
-                <div class="stat-icon green">
-                  <i class="fas fa-recycle"></i>
-                </div>
-                <div class="stat-info">
-                  <div class="stat-value">15</div>
-                  <div class="stat-label">Pickups Completed</div>
-                </div>
-              </div>
-
-              <div class="stat-card">
-                <div class="stat-icon orange">
-                  <i class="fas fa-weight"></i>
-                </div>
-                <div class="stat-info">
-                  <div class="stat-value">45 Kg</div>
-                  <div class="stat-label">Total Waste</div>
-                </div>
-              </div>
-
-              <div class="stat-card">
-                <div class="stat-icon blue">
-                  <i class="fas fa-coins"></i>
-                </div>
-                <div class="stat-info">
-                  <div class="stat-value">Rp 225.000</div>
-                  <div class="stat-label">Total Spent</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="profile-actions">
-<<<<<<< HEAD
-            <a th:href="@{/login}" class="btn-action danger">
-=======
-            <a href="login.html" class="btn-action danger">
->>>>>>> 91f24e28f179339d6805b090435767b894ba3a26
-              <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
-          </div>
+            <!-- Profile content -->
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <footer>
-      <div class="container">
+<footer>
+    <div class="container">
         <p>&copy; 2023 TrashGo. All rights reserved.</p>
-      </div>
-    </footer>
+    </div>
+</footer>
 
-    <script>
-      // Check authentication when page loads
-      checkAuth();
-    </script>
-  </body>
+<script>
+    // Check authentication
+    checkAuth();
+</script>
+</body>
 </html>
