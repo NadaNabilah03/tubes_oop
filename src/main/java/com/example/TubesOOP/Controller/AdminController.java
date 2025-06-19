@@ -2,9 +2,9 @@ package com.example.TubesOOP.Controller;
 
 import com.example.TubesOOP.entity.Admin;
 import com.example.TubesOOP.entity.HistoryBooking;
-import com.example.TubesOOP.payload.AdminInfoResponse;
-import com.example.TubesOOP.payload.AdminLoginRequest;
-import com.example.TubesOOP.payload.AdminRegisterRequest;
+import com.example.TubesOOP.payload.admin.AdminInfoResponse;
+import com.example.TubesOOP.payload.admin.AdminLoginRequest;
+import com.example.TubesOOP.payload.admin.AdminRegisterRequest;
 import com.example.TubesOOP.service.AdminService;
 import com.example.TubesOOP.service.HistoryBookingService;
 import org.springframework.beans.factory.annotation.Autowired;

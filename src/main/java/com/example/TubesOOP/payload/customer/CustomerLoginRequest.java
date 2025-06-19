@@ -1,4 +1,4 @@
-package com.example.TubesOOP.payload;
+package com.example.TubesOOP.payload.customer;
 
 import jakarta.validation.constraints.NotBlank;
 

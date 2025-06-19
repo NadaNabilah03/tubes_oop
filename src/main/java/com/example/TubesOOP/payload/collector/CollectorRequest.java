@@ -1,13 +1,13 @@
-package com.example.TubesOOP.payload;
+package com.example.TubesOOP.payload.collector;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class CustomerUpdateRequest {
+public class CollectorRequest {
 
     @NotBlank(message = "Nama tidak boleh kosong")
-    private String nama;
+    private String username;
 
     @NotBlank(message = "Email tidak boleh kosong")
     @Email(message = "Email tidak valid")
@@ -20,12 +20,17 @@ public class CustomerUpdateRequest {
     @Size(min = 10, max = 15, message = "No. Telepon harus antara 10-15 karakter")
     private String noTelepon;
 
+    @NotBlank(message = "Area tugas tidak boleh kosong")
+    private String areaTugas;
+
+    private boolean aktif;
+
     // Getter & Setter
     public String getUsername() {
-        return nama;
+        return username;
     }
     public void setUsername(String nama) {
-        this.nama = nama;
+        this.username = nama;
     }
     public String getEmail() {
         return email;
@@ -44,5 +49,17 @@ public class CustomerUpdateRequest {
     }
     public void setNoTelepon(String noTelepon) {
         this.noTelepon = noTelepon;
+    }
+    public String getAreaTugas() {
+        return areaTugas;
+    }
+    public void setAreaTugas(String areaTugas) {
+        this.areaTugas = areaTugas;
+    }
+    public boolean isAktif() {
+        return aktif;
+    }
+    public void setAktif(boolean aktif) {
+        this.aktif = aktif;
     }
 }

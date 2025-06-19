@@ -1,9 +1,9 @@
 package com.example.TubesOOP.Controller;
 
 import com.example.TubesOOP.entity.Customer;
-import com.example.TubesOOP.payload.CustomerLoginRequest;
-import com.example.TubesOOP.payload.CustomerRegisterRequest;
-import com.example.TubesOOP.payload.CustomerResponse;
+import com.example.TubesOOP.payload.customer.CustomerLoginRequest;
+import com.example.TubesOOP.payload.customer.CustomerRegisterRequest;
+import com.example.TubesOOP.payload.customer.CustomerResponse;
 import com.example.TubesOOP.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,9 +41,9 @@ public class CustomerController {
                     request.getUsername(),
                     request.getEmail(),
                     request.getPassword(),
-                    request.getUsername(),
-                    request.getAlamat(),
-                    request.getNoTelepon()
+                    request.getAddress(),
+                    request.getPhoneNumber(),
+                    null
             );
             return "redirect:/login?registered";
         } catch (Exception e) {

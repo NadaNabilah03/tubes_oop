@@ -1,9 +1,9 @@
-package com.example.TubesOOP.payload;
+package com.example.TubesOOP.payload.admin;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class CollectorChangePasswordRequest {
+public class AdminChangePasswordRequest {
 
     @NotBlank(message = "Password lama tidak boleh kosong")
     private String oldPassword;

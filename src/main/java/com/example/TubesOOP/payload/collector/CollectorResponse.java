@@ -1,19 +1,19 @@
-package com.example.TubesOOP.payload;
+package com.example.TubesOOP.payload.collector;
 
 public class CollectorResponse {
     private Long id;
     private String username;
     private String email;
-    private String alamat;
-    private String noTelepon;
+    private String address;
+    private String phoneNumber;
     private boolean aktif;
 
-    public CollectorResponse(Long id, String nama, String email, String alamat, String noTelepon, boolean aktif) {
+    public CollectorResponse(Long id, String username, String email, String alamat, String noTelepon, boolean aktif) {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.alamat = alamat;
-        this.noTelepon = noTelepon;
+        this.address = alamat;
+        this.phoneNumber = noTelepon;
         this.aktif = aktif;
     }
 
@@ -36,17 +36,17 @@ public class CollectorResponse {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getAlamat() {
-        return alamat;
+    public String getAddress() {
+        return address;
     }
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
+    public void setAddress(String address) {
+        this.address = address;
     }
-    public String getNoTelepon() {
-        return noTelepon;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
-    public void setNoTelepon(String noTelepon) {
-        this.noTelepon = noTelepon;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public boolean isAktif() {

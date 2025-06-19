@@ -2,7 +2,7 @@ package com.example.TubesOOP.service;
 
 import com.example.TubesOOP.entity.Customer;
 import com.example.TubesOOP.repository.CustomerRepository;
-import com.example.TubesOOP.payload.CustomerResponse;
+import com.example.TubesOOP.payload.customer.CustomerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,13 +30,12 @@ public class CustomerService {
     // Mengubah objek Customer menjadi CustomerResponse
     public CustomerResponse convertToResponse(Customer customer) {
         return new CustomerResponse(
-                customer.getId(),
-                customer.getUsername(),  // ← asumsi nama = username
+                customer.getCustomerId(),  // Changed from getId() to getCustomerId()
+                customer.getUsername(),
                 customer.getEmail(),
                 customer.getAddress(),
                 customer.getPhoneNumber()
         );
-
     }
 
     // Autentikasi login customer
@@ -63,13 +62,14 @@ public class CustomerService {
             throw new Exception("registerCustomer.Username already used");
         }
 
-        Customer newCustomer = new Customer();
-        newCustomer.setUsername(username);
-        newCustomer.setEmail(email);
-        newCustomer.setPassword(passwordEncoder.encode(password));
-        newCustomer.setAddress(address);
-        newCustomer.setPhoneNumber(phoneNumber);
-        newCustomer.setProfilePic(profilePic != null ? profilePic : "/image/avatar.jpg");
+        Customer newCustomer = new Customer(
+                username,
+                email,
+                password,
+                phoneNumber,
+                address,
+                profilePic != null ? profilePic : "/image/avatar.jpg"
+        );
 
         repository.save(newCustomer);
     }

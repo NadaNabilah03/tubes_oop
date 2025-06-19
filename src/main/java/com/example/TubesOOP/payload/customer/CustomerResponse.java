@@ -1,19 +1,19 @@
-package com.example.TubesOOP.payload;
+package com.example.TubesOOP.payload.customer;
 
 public class CustomerResponse {
     private Long id;
     private String username;
     private String email;
-    private String alamat;
-    private String noTelepon;
+    private String address;
+    private String phoneNumber;
 
     // Constructor
-    public CustomerResponse(Long id, String nama, String email, String alamat, String noTelepon) {
+    public CustomerResponse(Long id, String username, String email, String alamat, String noTelepon) {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.alamat = alamat;
-        this.noTelepon = noTelepon;
+        this.address = alamat;
+        this.phoneNumber = noTelepon;
     }
 
     // Getter & Setter
@@ -42,20 +42,20 @@ public class CustomerResponse {
         this.email = email;
     }
 
-    public String getAlamat() {
-        return alamat;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getNoTelepon() {
-        return noTelepon;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setNoTelepon(String noTelepon) {
-        this.noTelepon = noTelepon;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
 

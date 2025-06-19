@@ -1,9 +1,9 @@
 package com.example.TubesOOP.Controller;
 
 import com.example.TubesOOP.entity.Collector;
-import com.example.TubesOOP.payload.CollectorLoginRequest;
-import com.example.TubesOOP.payload.CollectorRegisterRequest;
-import com.example.TubesOOP.payload.CollectorResponse;
+import com.example.TubesOOP.payload.collector.CollectorLoginRequest;
+import com.example.TubesOOP.payload.collector.CollectorRegisterRequest;
+import com.example.TubesOOP.payload.collector.CollectorResponse;
 import com.example.TubesOOP.service.CollectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,7 +39,6 @@ public class CollectorController {
     public String registerCollector(@ModelAttribute CollectorRegisterRequest request) {
         try {
             collectorService.registerCollector(
-                    request.getUsername(),
                     request.getUsername(),
                     request.getEmail(),
                     request.getPassword(),

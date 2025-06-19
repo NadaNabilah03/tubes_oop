@@ -1,10 +1,10 @@
-package com.example.TubesOOP.payload;
+package com.example.TubesOOP.payload.admin;
 
-public class CustomerLogoutResponse {
+public class AdminLogoutResponse {
 
     private String message;
 
-    public CustomerLogoutResponse(String message) {
+    public AdminLogoutResponse(String message) {
         this.message = message;
     }
 

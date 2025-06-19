@@ -1,10 +1,10 @@
-package com.example.TubesOOP.payload;
+package com.example.TubesOOP.payload.customer;
 
-public class CollectorLogoutResponse {
+public class CustomerLogoutResponse {
 
     private String message;
 
-    public CollectorLogoutResponse(String message) {
+    public CustomerLogoutResponse(String message) {
         this.message = message;
     }
 

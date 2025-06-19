@@ -1,7 +1,8 @@
 package com.example.TubesOOP.service;
 
 import com.example.TubesOOP.entity.Admin;
-import com.example.TubesOOP.payload.AdminInfoResponse;
+import com.example.TubesOOP.payload.admin.AdminInfoResponse;
+import com.example.TubesOOP.payload.admin.AdminRegisterResponse;
 import com.example.TubesOOP.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,7 +32,7 @@ public class AdminService {
         return admin.get();
     }
 
-    public void registerAdmin(String username, String email, String password, String profilePic) throws Exception {
+    public AdminRegisterResponse registerAdmin(String username, String email, String password, String profilePic) throws Exception {
         if (adminRepository.existsByEmail(email)) {
             throw new Exception("Email already used");
         }
@@ -44,9 +45,14 @@ public class AdminService {
         admin.setUsername(username);
         admin.setEmail(email);
         admin.setPassword(passwordEncoder.encode(password));
-        admin.setProfilePic(profilePic);  // ← TAMBAHKAN ini
+        admin.setProfilePic(profilePic);
 
-        adminRepository.save(admin);
+        return new AdminRegisterResponse(
+                admin.getAdminId(),
+                admin.getUsername(),
+                admin.getEmail(),
+                admin.getProfilePic()
+        );
     }
 
 
@@ -66,7 +72,7 @@ public class AdminService {
 
     public AdminInfoResponse convertToResponse(Admin admin) {
         return new AdminInfoResponse(
-                admin.getId(),
+                admin.getAdminId(),
                 admin.getUsername(),
                 admin.getEmail()
         );

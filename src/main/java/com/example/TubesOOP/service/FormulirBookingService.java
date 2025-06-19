@@ -88,7 +88,7 @@ public class FormulirBookingService {
     public void completeBooking(Long bookingId, Long collectorId) throws Exception {
         FormulirBooking booking = getBookingById(bookingId);
 
-        if (booking.getCollector() == null || !booking.getCollector().getId().equals(collectorId)) {
+        if (booking.getCollector() == null || !booking.getCollector().getCollectorId().equals(collectorId)) {
             throw new Exception("completeBooking.Collector tidak diizinkan menyelesaikan booking ini.");
         }
 
@@ -100,7 +100,7 @@ public class FormulirBookingService {
     public void cancelBooking(Long bookingId, Long collectorId) throws Exception {
         FormulirBooking booking = getBookingById(bookingId);
 
-        if (booking.getCollector() == null || !booking.getCollector().getId().equals(collectorId)) {
+        if (booking.getCollector() == null || !booking.getCollector().getCollectorId().equals(collectorId)) {
             throw new Exception("cancelBooking.Collector tidak diizinkan membatalkan booking ini.");
         }
 

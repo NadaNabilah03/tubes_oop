@@ -1,4 +1,4 @@
-package com.example.TubesOOP.payload;
+package com.example.TubesOOP.payload.admin;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

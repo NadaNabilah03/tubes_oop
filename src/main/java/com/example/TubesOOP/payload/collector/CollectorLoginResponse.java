@@ -1,13 +1,12 @@
-package com.example.TubesOOP.payload;
+package com.example.TubesOOP.payload.collector;
 
-public class AdminLoginResponse {
-
+public class CollectorLoginResponse {
     private String message;
     private Long id;
     private String username;
     private String email;
 
-    public AdminLoginResponse(String message, Long id, String username, String email) {
+    public CollectorLoginResponse(String message, Long id, String username, String email) {
         this.message = message;
         this.id = id;
         this.username = username;
