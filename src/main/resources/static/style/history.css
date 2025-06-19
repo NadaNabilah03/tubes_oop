@@ -283,5 +283,34 @@
     justify-content: space-between;
     width: 100%;
   }
+
+  .btn-complete, .btn-cancel {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    margin-right: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .btn-complete {
+    background-color: #28a745;
+  }
+
+  .btn-complete:hover {
+    background-color: #218838;
+  }
+
+  .btn-cancel {
+    background-color: #dc3545;
+  }
+
+  .btn-cancel:hover {
+    background-color: #c82333;
+  }
+
+
 }
 >>>>>>> 91f24e28f179339d6805b090435767b894ba3a26

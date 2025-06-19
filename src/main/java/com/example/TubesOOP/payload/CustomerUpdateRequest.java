@@ -21,10 +21,10 @@ public class CustomerUpdateRequest {
     private String noTelepon;
 
     // Getter & Setter
-    public String getNama() {
+    public String getUsername() {
         return nama;
     }
-    public void setNama(String nama) {
+    public void setUsername(String nama) {
         this.nama = nama;
     }
     public String getEmail() {

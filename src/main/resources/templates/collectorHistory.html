@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrashGo - History</title>
+
+  <!-- CSS -->
+  <link th:href="@{/style/style.css}" rel="stylesheet" />
+  <link th:href="@{/style/mobile.css}" rel="stylesheet" />
+  <link th:href="@{/style/history.css}" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+
+</head>
+
+<body>
+<!-- Header sama dengan template sebelumnya -->
+<header>
+  <div class="container">
+    <div class="logo">
+      <h1>Trash<span>Go</span></h1>
+    </div>
+    <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav id="mobileNav">
+      <ul>
+        <li><a th:href="@{/collector/home}">Home</a></li>
+        <li><a th:href="@{/collector/history}" class="active">History</a></li>
+        <li><a th:href="@{/collector/about}">About Us</a></li>
+        <li><a th:href="@{/collector/{email}(email=${userEmail})}}">Profile</a></li>
+        <li><a th:href="@{/collector/login}">Logout</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="history-section">
+  <div class="container">
+    <h2>History</h2>
+
+    <div class="history-container">
+      <!-- Item history akan diisi dinamis dari backend -->
+      <div class="history-item" th:each="booking : ${bookings}">
+        <div class="history-date">
+          <div class="date" th:text="${#dates.format(booking.tanggalPickup, 'dd')}"></div>
+          <div class="month" th:text="${#dates.format(booking.tanggalPickup, 'MMM')}"></div>
+        </div>
+        <div class="history-content">
+          <h3 th:text="'Jenis Sampah: ' + ${booking.jenisSampah}"></h3>
+          <p th:text="'Berat: ' + ${booking.beratSampah} + ' kg'"></p>
+          <p th:text="'Alamat: ' + ${booking.alamatPickup}"></p>
+          <p th:text="'Tanggal: ' + ${#temporals.format(booking.tanggalPickup, 'dd MMMM yyyy')}"></p>
+          <p th:text="'Jam: ' + ${#temporals.format(booking.jamPickup, 'HH:mm')}"></p>
+          <p th:text="'Status: ' + ${booking.status}"></p>
+
+          <!-- Tombol jika status IN_PROGRESS -->
+          <div th:if="${booking.status.name() == 'IN_PROGRESS'}">
+            <form th:action="@{'/booking/booking/complete/collector/' + ${booking.id}}" method="post" style="display:inline;">
+              <button type="submit" class="btn-complete">Selesaikan</button>
+            </form>
+            <form th:action="@{'/booking/booking/cancel/collector/' + ${booking.id}}" method="post" style="display:inline;">
+              <button type="submit" class="btn-cancel">Batalkan</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2023 TrashGo. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // Check authentication
+  checkAuth();
+</script>
+</body>
+</html>

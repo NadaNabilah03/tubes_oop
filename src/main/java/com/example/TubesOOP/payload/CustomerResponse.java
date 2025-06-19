@@ -2,7 +2,7 @@ package com.example.TubesOOP.payload;
 
 public class CustomerResponse {
     private Long id;
-    private String nama;
+    private String username;
     private String email;
     private String alamat;
     private String noTelepon;
@@ -10,7 +10,7 @@ public class CustomerResponse {
     // Constructor
     public CustomerResponse(Long id, String nama, String email, String alamat, String noTelepon) {
         this.id = id;
-        this.nama = nama;
+        this.username = username;
         this.email = email;
         this.alamat = alamat;
         this.noTelepon = noTelepon;
@@ -26,12 +26,12 @@ public class CustomerResponse {
         this.id = id;
     }
 
-    public String getNama() {
-        return nama;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {

@@ -6,9 +6,9 @@
     <title>TrashGo - Login</title>
 
     <!-- CSS -->
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
-    <link th:href="@{/css/mobile.css}" rel="stylesheet" />
-    <link th:href="@{/css/auth.css}" rel="stylesheet" />
+    <link th:href="@{/style/style.css}" rel="stylesheet" />
+    <link th:href="@{/style/mobile.css}" rel="stylesheet" />
+    <link th:href="@{/style/auth.css}" rel="stylesheet" />
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -21,9 +21,9 @@
             <h1>Trash<span>Go</span></h1>
         </div>
 
-        <h2>Please login your account</h2>
+        <h2>Please Login Your Collector Account</h2>
 
-        <form class="auth-form" th:action="@{/api/admin/login}" method="post">
+        <form class="auth-form" th:action="@{/collector/login}" method="post">
             <!-- Form fields -->
             <div class="form-group">
                 <label for="email">Email</label>
@@ -44,7 +44,7 @@
         </form>
 
         <div class="auth-footer">
-            <p>Didn't have an Account? <a th:href="@{/register}">Sign-up</a></p>
+            <p>Didn't have an Account? <a th:href="@{/collector/register}">Sign-up</a></p>
         </div>
     </div>
 </div>

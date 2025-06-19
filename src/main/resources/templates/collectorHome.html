@@ -6,14 +6,13 @@
     <title>TrashGo - Waste Collection Service</title>
 
     <!-- CSS -->
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
-    <link th:href="@{/css/mobile.css}" rel="stylesheet" />
+    <link th:href="@{/style/style.css}" rel="stylesheet" />
+    <link th:href="@{/style/mobile.css}" rel="stylesheet" />
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-    <!-- JS -->
-    <script th:src="@{/js/auth.js}"></script>
+
 </head>
 
 <body>
@@ -24,16 +23,17 @@
             <h1>Trash<span>Go</span></h1>
         </div>
         <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-            <span></span><span></span><span></span>
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
         <nav id="mobileNav">
             <ul>
-                <li><a th:href="@{/home}" class="active">Home</a></li>
-                <li><a th:href="@{/history}">History</a></li>
-                <li><a th:href="@{/about}">About Us</a></li>
-                <li><a th:href="@{/profile}">Profile</a></li>
-                <li><a th:href="@{/admin-dashboard}">Admin</a></li>
-                <li><a th:href="@{/login}">Logout</a></li>
+                <li><a th:href="@{/collector/home}" class="active">Home</a></li>
+                <li><a th:href="@{/collector/history}">History</a></li>
+                <li><a th:href="@{/collector/about}">About Us</a></li>
+                <li><a th:href="@{/collector/{email}(email=${userEmail})}}">Profile</a></li>
+                <li><a th:href="@{/collector/login}">Logout</a></li>
             </ul>
         </nav>
     </div>
@@ -51,7 +51,7 @@
                 </a>
             </div>
             <div class="hero-image">
-                <img th:src="@{/images/trash-collection.jpg}" alt="People collecting trash" />
+                <img th:src="@{/image/trash-collection.jpg}" alt="People collecting trash" />
             </div>
         </div>
     </div>
@@ -65,7 +65,7 @@
             <a th:href="@{/history}" class="service-card-link">
                 <div class="service-card">
                     <div class="card-image">
-                        <img th:src="@{/images/history-home.png}" alt="History" />
+                        <img th:src="@{/image/history-home.png}" alt="History" />
                     </div>
                     <h3>History</h3>
                 </div>

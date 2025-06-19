@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrashGo - Profile</title>
+
+    <!-- CSS -->
+    <link th:href="@{/style/style.css}" rel="stylesheet" />
+    <link th:href="@{/style/mobile.css}" rel="stylesheet" />
+    <link th:href="@{/style/profile.css}" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+
+</head>
+
+<body>
+<!-- Header -->
+<header>
+    <div class="container">
+        <div class="logo">
+            <h1>Trash<span>Go</span></h1>
+        </div>
+        <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="mobileNav">
+            <ul>
+                <li><a th:href="@{/customer/home}">Home</a></li>
+                <li><a th:href="@{/customer/history}">History</a></li>
+                <li><a th:href="@{/customer/about}">About Us</a></li>
+                <li><a th:href="@{/customer/{email}(email=${userEmail})}" class="active">Profile</a></li>
+                <li><a th:href="@{/customer/login}">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- Profile Content -->
+<section class="profile-section">
+    <div class="container">
+        <h2>Profile</h2>
+        <div class="profile-container">
+            <!-- Profile content -->
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 TrashGo. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    // Check authentication
+    checkAuth();
+</script>
+</body>
+</html>

@@ -31,6 +31,13 @@ public class FormulirBookingService {
     @Autowired
     private CollectorRepository collectorRepository;
 
+    private double hitungHarga(Double beratSampah) {
+        if (beratSampah == null || beratSampah <= 0) {
+            throw new IllegalArgumentException("Berat sampah harus lebih dari 0");
+        }
+        return (beratSampah > 5) ? (beratSampah - 5) * 1000 + 5000 : 5000;
+    }
+
     // Tambah booking baru
     public void createBooking(WasteType jenisSampah, Double beratSampah,
                               LocalDate tanggalPickup, LocalTime jamPickup,
@@ -41,16 +48,10 @@ public class FormulirBookingService {
             throw new Exception("createBooking.Customer not found");
         }
 
-        // Hitung harga otomatis: berat > 5 kg dikenakan 1000/kg
-        double harga = 0;
-        if (beratSampah > 5) {
-            harga = (beratSampah - 5) * 1000;
-        }
-
         FormulirBooking booking = new FormulirBooking();
         booking.setJenisSampah(jenisSampah);
         booking.setBeratSampah(beratSampah);
-        booking.setHarga(harga);
+        booking.setHarga(hitungHarga(beratSampah));
         booking.setTanggalPickup(tanggalPickup);
         booking.setJamPickup(jamPickup);
         booking.setStatus(BookingStatus.MENUNGGU);
@@ -84,23 +85,33 @@ public class FormulirBookingService {
     }
 
     // Ubah status booking menjadi COMPLETED
-    public void completeBooking(Long bookingId) throws Exception {
+    public void completeBooking(Long bookingId, Long collectorId) throws Exception {
         FormulirBooking booking = getBookingById(bookingId);
+
+        if (booking.getCollector() == null || !booking.getCollector().getId().equals(collectorId)) {
+            throw new Exception("completeBooking.Collector tidak diizinkan menyelesaikan booking ini.");
+        }
+
         booking.setStatus(BookingStatus.SELESAI);
         bookingRepository.save(booking);
     }
 
     // Membatalkan booking
-    public void cancelBooking(Long bookingId) throws Exception {
+    public void cancelBooking(Long bookingId, Long collectorId) throws Exception {
         FormulirBooking booking = getBookingById(bookingId);
 
-        if (booking.getStatus() == BookingStatus.SELESAI || booking.getStatus() == BookingStatus.DIPROSES) {
-            throw new Exception("cancelBooking.Booking tidak bisa dibatalkan karena sedang diproses atau sudah selesai.");
+        if (booking.getCollector() == null || !booking.getCollector().getId().equals(collectorId)) {
+            throw new Exception("cancelBooking.Collector tidak diizinkan membatalkan booking ini.");
+        }
+
+        if (booking.getStatus() == BookingStatus.SELESAI) {
+            throw new Exception("cancelBooking.Booking sudah selesai dan tidak bisa dibatalkan.");
         }
 
         booking.setStatus(BookingStatus.DIBATALKAN);
         bookingRepository.save(booking);
     }
+
 
     // Hapus booking berdasarkan ID
     public void deleteBooking(Long id) throws Exception {
@@ -133,7 +144,7 @@ public class FormulirBookingService {
     // Convert satu booking jadi response
     public BookingResponse convertToResponse(FormulirBooking booking) {
         String customerUsername = (booking.getCustomer() != null) ? booking.getCustomer().getUsername() : null;
-        String collectorName = (booking.getCollector() != null) ? booking.getCollector().getName() : null;
+        String collectorName = (booking.getCollector() != null) ? booking.getCollector().getUsername() : null;
 
         return new BookingResponse(
                 booking.getId(),

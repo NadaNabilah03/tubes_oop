@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Size;
 public class CollectorRequest {
 
     @NotBlank(message = "Nama tidak boleh kosong")
-    private String nama;
+    private String username;
 
     @NotBlank(message = "Email tidak boleh kosong")
     @Email(message = "Email tidak valid")
@@ -26,11 +26,11 @@ public class CollectorRequest {
     private boolean aktif;
 
     // Getter & Setter
-    public String getNama() {
-        return nama;
+    public String getUsername() {
+        return username;
     }
-    public void setNama(String nama) {
-        this.nama = nama;
+    public void setUsername(String nama) {
+        this.username = nama;
     }
     public String getEmail() {
         return email;

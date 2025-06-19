@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrashGo - About Us</title>
+
+    <!-- CSS -->
+    <link th:href="@{/style/style.css}" rel="stylesheet" />
+    <link th:href="@{/style/mobile.css}" rel="stylesheet" />
+    <link th:href="@{/style/about.css}" rel="stylesheet" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+
+</head>
+
+<body>
+<header>
+    <div class="container">
+        <div class="logo">
+            <h1>Trash<span>Go</span></h1>
+        </div>
+        <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="mobileNav">
+            <ul>
+                <li><a th:href="@{/customer/home}">Home</a></li>
+                <li><a th:href="@{/customer/history}">History</a></li>
+                <li><a th:href="@{/customer/about}" class="active">About Us</a></li>
+                <li><a th:href="@{/customer/{email}(email=${userEmail})}">Profile</a></li>
+                <li><a th:href="@{/customer/login}">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="hero-about">
+    <div class="hero-image-container">
+        <img th:src="@{/image/trash-collection-about.jpg}" alt="Trash collection" />
+        <div class="overlay"></div>
+    </div>
+</section>
+
+<section class="about-content">
+    <div class="container">
+        <h1>About Us</h1>
+
+        <div class="about-description">
+            <p>
+                TrashGo merupakan aplikasi berbasis web yang dikembangkan untuk
+                memfasilitasi proses pengelolaan sampah rumah tangga secara lebih
+                mudah, terjadwal, dan efisien. Aplikasi ini bertujuan untuk
+                mempertemukan masyarakat dengan petugas pengangkut sampah melalui
+                satu platform digital yang terintegrasi.
+            </p>
+            <p>
+                Manfaat dari pengembangan aplikasi ini meliputi kemudahan akses
+                informasi jadwal pengambilan bagi masyarakat, pengurangan beban
+                kerja dan peningkatan efisiensi operasional bagi petugas.
+            </p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2023 TrashGo. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    // Check authentication when page loads
+    checkAuth();
+</script>
+</body>
+</html>

@@ -1,38 +1,46 @@
 package com.example.TubesOOP.Controller;
 
 import com.example.TubesOOP.entity.Admin;
+import com.example.TubesOOP.entity.HistoryBooking;
 import com.example.TubesOOP.payload.AdminInfoResponse;
 import com.example.TubesOOP.payload.AdminLoginRequest;
 import com.example.TubesOOP.payload.AdminRegisterRequest;
 import com.example.TubesOOP.service.AdminService;
+import com.example.TubesOOP.service.HistoryBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
 
-@RestController
-@RequestMapping("/api/admin")
+import java.util.List;
+
+@Controller
+@RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private HistoryBookingService historyBookingService;
+
     @PostMapping("/login")
-    public String loginAdmin(@RequestBody AdminLoginRequest request) {
+    public String loginAdmin(@ModelAttribute AdminLoginRequest request) {
         try {
             Admin admin = adminService.authenticateAdmin(request.getEmail(), request.getPassword());
-
-            return "redirect:/admin-dashboard";
+            return "redirect:/dashboard";
         } catch (Exception e) {
-            return "redirect:/login?error";
+            return "redirect:/admin/login";
         }
     }
 
     @GetMapping("/login")
     public String showLoginForm() {
-        return "login";
+        return "adminLogin";
     }
 
     @PostMapping("/register")
-    public String registerAdmin(@RequestBody AdminRegisterRequest request) {
+    public String registerAdmin(@ModelAttribute AdminRegisterRequest request) {
         try {
             adminService.registerAdmin(request.getUsername(), request.getEmail(), request.getPassword());
             return "redirect:/login?registered";
@@ -43,15 +51,33 @@ public class AdminController {
 
     @GetMapping("/register")
     public String showRegisterForm() {
-        return "register";
+        return "adminRegister";
     }
 
     @GetMapping("/{email}")
-    public String getAdminInfo(@PathVariable String email) {
+    public String getAdminInfo(@PathVariable String email, Model model) {
         try {
-            return "redirect:/profile";
+            AdminInfoResponse admin = adminService.getAdminInfo(email); // ambil dari DB
+            model.addAttribute("admin", admin);
+            return "adminProfile";
         } catch (Exception e) {
             return "redirect:/error";
         }
     }
+
+
+    @GetMapping("/about")
+    public String aboutPage() {
+        return "adminAbout";
+    }
+
+    @GetMapping("/dashboard")
+    public String showAdminDashboard(@CookieValue(value = "userCookie", defaultValue = "") String userEmail, Model model) {
+        List<HistoryBooking> historyList = historyBookingService.getAllHistory();
+        model.addAttribute("userEmail", userEmail);
+        model.addAttribute("transaksiList", historyList); // ini buat tabel
+        return "adminDashboard";
+    }
+
+
 }

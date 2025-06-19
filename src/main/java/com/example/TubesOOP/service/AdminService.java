@@ -47,6 +47,11 @@ public class AdminService {
         adminRepository.save(admin);
     }
 
+    public AdminInfoResponse getAdminInfo(String email) throws Exception {
+        Admin admin = findAdminByEmail(email); // pake method yg udah ada
+        return convertToResponse(admin);       // ubah ke response
+    }
+
     public Admin findAdminByEmail(String email) throws Exception {
         Optional<Admin> admin = adminRepository.findByEmail(email);
         if (!admin.isPresent()) {
@@ -62,4 +67,7 @@ public class AdminService {
                 admin.getEmail()
         );
     }
+
+
+
 }

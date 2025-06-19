@@ -6,21 +6,38 @@
     <title>TrashGo - Form Pick Up</title>
 
     <!-- CSS -->
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
-    <link th:href="@{/css/mobile.css}" rel="stylesheet" />
-    <link th:href="@{/css/form.css}" rel="stylesheet" />
+    <link th:href="@{/style/style.css}" rel="stylesheet" />
+    <link th:href="@{/style/mobile.css}" rel="stylesheet" />
+    <link th:href="@{/style/form.css}" rel="stylesheet" />
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-    <!-- JS -->
-    <script th:src="@{/js/auth.js}"></script>
+
 </head>
 
 <body>
 <!-- Header sama dengan template sebelumnya -->
 <header>
-    <!-- ... -->
+    <div class="container">
+        <div class="logo">
+            <h1>Trash<span>Go</span></h1>
+        </div>
+        <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="mobileNav">
+            <ul>
+                <li><a th:href="@{/customer/home}">Home</a></li>
+                <li><a th:href="@{/customer/history}">History</a></li>
+                <li><a th:href="@{/customer/about}">About Us</a></li>
+                <li><a th:href="@{/customer/{email}(email=${userEmail})}">Profile</a></li>
+                <li><a th:href="@{/customer/login}">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
 </header>
 
 <section class="form-section">
@@ -28,24 +45,65 @@
         <h2>Form pick up</h2>
 
         <form id="pickupForm" th:action="@{/api/booking/create}" method="post">
-            <!-- Field formulir tetap sama -->
             <div class="form-group">
                 <label for="nama">Nama</label>
                 <input type="text" id="nama" name="nama" required />
             </div>
 
-            <!-- ... field lainnya ... -->
+            <div class="form-group">
+                <label for="telepon">Nomor telpon</label>
+                <input type="text" id="telepon" name="telepon" required />
+            </div>
+
+            <div class="form-group">
+                <label for="alamat">Alamat</label>
+                <input type="text" id="alamat" name="alamat" required />
+            </div>
+
+            <div class="form-group">
+                <label>Jenis sampah</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="jenisSampah" value="Organik" required /> Organik</label>
+                    <label><input type="radio" name="jenisSampah" value="Non-organik" /> Non-organik</label>
+                </div>
+            </div>
+
+            <div class="form-group berat-group">
+                <label>Masukkan berat sampah</label>
+                <div class="berat-wrapper">
+                    <input type="number" id="berat" name="beratSampah" placeholder="Kg" required />
+                    <span class="berat-arrow">></span>
+                    <input type="text" id="harga" name="harga" placeholder="Rp" readonly />
+                </div>
+            </div>
+
+            <div class="form-group tanggal-group">
+                <label>Tanggal</label>
+                <div class="tanggal-wrapper">
+                    <input type="text" name="tanggal" placeholder="dd" maxlength="2" required />
+                    <span>/</span>
+                    <input type="text" name="bulan" placeholder="mm" maxlength="2" required />
+                    <span>/</span>
+                    <input type="text" name="tahun" placeholder="yy" maxlength="4" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="jam">Masukkan jam pick up</label>
+                <input type="time" id="jam" name="jam" required />
+            </div>
 
             <div class="form-submit">
                 <button type="submit" class="btn-submit">Send</button>
             </div>
         </form>
+
     </div>
 </section>
 
 <footer>
     <div class="container">
-        <p>&copy; 2023 TrashGo. All rights reserved.</p>
+        <p>&copy; 2025 TrashGo. All rights reserved.</p>
     </div>
 </footer>
 

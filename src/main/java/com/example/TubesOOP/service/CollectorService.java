@@ -42,7 +42,7 @@ public class CollectorService {
         }
 
         Collector collector = new Collector();
-        collector.setName(name);
+        collector.setUsername(name);
         collector.setEmail(email);
         collector.setPassword(passwordEncoder.encode(password));
         collector.setPhoneNumber(phoneNumber);
@@ -63,7 +63,7 @@ public class CollectorService {
     public CollectorResponse convertToResponse(Collector collector) {
         CollectorResponse response = new CollectorResponse(
                 collector.getId(),
-                collector.getName(),
+                collector.getUsername(),
                 collector.getEmail(),
                 collector.getAddress(),
                 collector.getPhoneNumber(),

@@ -2,7 +2,7 @@ package com.example.TubesOOP.payload;
 
 public class CollectorResponse {
     private Long id;
-    private String nama;
+    private String username;
     private String email;
     private String alamat;
     private String noTelepon;
@@ -10,7 +10,7 @@ public class CollectorResponse {
 
     public CollectorResponse(Long id, String nama, String email, String alamat, String noTelepon, boolean aktif) {
         this.id = id;
-        this.nama = nama;
+        this.username = username;
         this.email = email;
         this.alamat = alamat;
         this.noTelepon = noTelepon;
@@ -24,11 +24,11 @@ public class CollectorResponse {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getNama() {
-        return nama;
+    public String getUsername() {
+        return username;
     }
-    public void setNama(String nama) {
-        this.nama = nama;
+    public void setUsername(String nama) {
+        this.username = nama;
     }
     public String getEmail() {
         return email;

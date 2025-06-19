@@ -6,23 +6,24 @@ import com.example.TubesOOP.payload.CustomerRegisterRequest;
 import com.example.TubesOOP.payload.CustomerResponse;
 import com.example.TubesOOP.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/api/customer")
+@Controller
+@RequestMapping("/customer")
 public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
 
     @PostMapping("/login")
-    public String loginCustomer(@RequestBody CustomerLoginRequest request) {
+    public String loginCustomer(@ModelAttribute CustomerLoginRequest request) {
         try {
             Customer customer = customerService.authenticateCustomer(
                     request.getEmail(), request.getPassword()
             );
             CustomerResponse response = customerService.convertToResponse(customer);
-            return "redirect:/home";
+            return "redirect:/customerHome";
         } catch (Exception e) {
             return "redirect:/login?error";
         }
@@ -30,11 +31,11 @@ public class CustomerController {
 
     @GetMapping("/login")
     public String showLoginForm() {
-        return "login";
+        return "customerLogin";
     }
 
     @PostMapping("/register")
-    public String registerCustomer(@RequestBody CustomerRegisterRequest request) {
+    public String registerCustomer(@ModelAttribute CustomerRegisterRequest request) {
         try {
             customerService.registerCustomer(request.getUsername(), request.getEmail(), request.getPassword());
             return "redirect:/login?registered";
@@ -45,7 +46,7 @@ public class CustomerController {
 
     @GetMapping("/register")
     public String showRegisterForm() {
-        return "register";
+        return "customerRegister";
     }
 
     @GetMapping("/{username}")
@@ -53,9 +54,24 @@ public class CustomerController {
         try {
             Customer customer = customerService.findCustomerByUsername(username);
             CustomerResponse response = customerService.convertToResponse(customer);
-            return "redirect:/profile";
+            return "redirect:/customerProfile";
         } catch (Exception e) {
             return "redirect:/error";
         }
+    }
+
+    @GetMapping("/about")
+    public String aboutPage() {
+        return "customerAbout";
+    }
+
+    @GetMapping("/home")
+    public String homePage() {
+        return "customerHome";
+    }
+
+    @GetMapping("/history")
+    public String historyPage() {
+        return "customerHistory";
     }
 }

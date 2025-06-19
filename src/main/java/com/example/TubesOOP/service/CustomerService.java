@@ -54,7 +54,7 @@ public class CustomerService {
     }
 
     // Registrasi customer baru
-    public void registerCustomer(String username, String email, String password) throws Exception {
+    public void registerCustomer(String username, String email, String password, String address, String phoneNumber, String profilePic) throws Exception {
         if (repository.existsByEmail(email)) {
             throw new Exception("registerCustomer.Email already used");
         }
@@ -67,8 +67,12 @@ public class CustomerService {
         newCustomer.setUsername(username);
         newCustomer.setEmail(email);
         newCustomer.setPassword(passwordEncoder.encode(password));
+        newCustomer.setAddress(address);
+        newCustomer.setPhoneNumber(phoneNumber);
+        newCustomer.setProfilePic(profilePic != null ? profilePic : "/image/avatar.jpg");
 
         repository.save(newCustomer);
     }
+
 }
 

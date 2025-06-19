@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrashGo - History</title>
+
+    <!-- CSS -->
+    <link th:href="@{/style/style.css}" rel="stylesheet" />
+    <link th:href="@{/style/mobile.css}" rel="stylesheet" />
+    <link th:href="@{/style/history.css}" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+
+</head>
+
+<body>
+<!-- Header sama dengan template sebelumnya -->
+<header>
+    <div class="container">
+        <div class="logo">
+            <h1>Trash<span>Go</span></h1>
+        </div>
+        <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="mobileNav">
+            <ul>
+                <li><a th:href="@{/customer/home}">Home</a></li>
+                <li><a th:href="@{/customer/history}" class="active">History</a></li>
+                <li><a th:href="@{/customer/about}" >About Us</a></li>
+                <li><a th:href="@{/customer/{email}(email=${userEmail})}">Profile</a></li>
+                <li><a th:href="@{/customer/login}">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="history-section">
+    <div class="container">
+        <h2>History</h2>
+
+        <div class="history-item" th:each="booking : ${bookings}">
+            <div class="history-date">
+                <div class="date" th:text="${#dates.format(booking.tanggalPickup, 'dd')}"></div>
+                <div class="month" th:text="${#dates.format(booking.tanggalPickup, 'MMM')}"></div>
+            </div>
+            <div class="history-content">
+                <h3 th:text="${booking.jenisSampah}">Jenis Sampah</h3>
+                <p><strong>Berat:</strong> <span th:text="${booking.beratSampah} + ' kg'">0 kg</span></p>
+                <p><strong>Jam Pickup:</strong> <span th:text="${booking.jamPickup}">00:00</span></p>
+                <p><strong>Status:</strong> <span th:text="${booking.status}">PENDING</span></p>
+
+                <!-- Tombol cancel hanya muncul kalau status = PENDING -->
+                <form th:action="@{/booking/cancel/customer/{id}(id=${booking.id})}" method="post"
+                      th:if="${booking.status == 'PENDING'}" style="margin-top: 10px;">
+                    <button type="submit" class="btn-cancel">Batalkan</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2023 TrashGo. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    // Check authentication
+    checkAuth();
+</script>
+</body>
+</html>

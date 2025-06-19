@@ -2,7 +2,6 @@ package com.example.TubesOOP.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
@@ -11,21 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "customers")
-public class Customer {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @NotBlank(message = "Username tidak boleh kosong")
-    private String username;
-
-    @NotBlank(message = "Email tidak boleh kosong")
-    @Email(message = "Format email harus valid")
-    private String email;
-
-    @NotBlank(message = "Password tidak boleh kosong")
-    private String password;
+public class Customer extends User {
 
     @NotBlank(message = "Nomor HP tidak boleh kosong")
     @Pattern(regexp = "^\\+?\\d{10,15}$", message = "Nomor HP harus valid dan terdiri dari 10-15 digit, bisa diawali +")
@@ -33,8 +18,6 @@ public class Customer {
 
     @NotBlank(message = "Alamat tidak boleh kosong")
     private String address;
-
-    private String profilePic;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonIgnore
@@ -47,78 +30,42 @@ public class Customer {
     public Customer() {
     }
 
-    //constructor untuk ambil data dari db
+    // Constructor ambil data dari DB
     public Customer(Long id, String username, String email, String password, String phoneNumber,
-                    String address, String profilePic, List<HistoryBooking> historyBookings,
-                    List<FormulirBooking> formulirBookings) {
-        this.id = id;
+                    String address, String profilePic,
+                    List<HistoryBooking> historyBookings, List<FormulirBooking> formulirBookings) {
+        this.setId(id);
         this.username = username;
         this.email = email;
         this.password = password;
+        this.profilePic = profilePic;
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.profilePic = profilePic;
         this.historyBookings = historyBookings;
         this.formulirBookings = formulirBookings;
     }
 
-    // constructor untuk user baru tanpa upload pp
+    // Constructor untuk user baru TANPA upload profilePic
     public Customer(String username, String email, String password, String phoneNumber, String address) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.profilePic = "/image/avatar.jpg";
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.profilePic = "/images/defaultPP.jpg";
-        this.historyBookings = new ArrayList<>();
-        this.formulirBookings = new ArrayList<>();
     }
 
-    //constructor untuk user baru upload pp
+    // Constructor untuk user baru DENGAN upload profilePic
     public Customer(String username, String email, String password, String phoneNumber, String address, String profilePic) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.profilePic = profilePic;
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.profilePic = profilePic;
-        this.historyBookings = new ArrayList<>();
-        this.formulirBookings = new ArrayList<>();
     }
 
-    // Getter & Setter
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+    // Getters & Setters
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -133,14 +80,6 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getProfilePic() {
-        return profilePic;
-    }
-
-    public void setProfilePic(String profilePic) {
-        this.profilePic = profilePic;
     }
 
     public List<HistoryBooking> getHistoryBookings() {

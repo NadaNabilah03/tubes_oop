@@ -23,7 +23,7 @@ public class BookingService {
         booking.setHarga(harga);
     }
 
-    // Contoh method simpan booking (misal nanti pake repository)
+
     public FormulirBooking simpanBooking(FormulirBooking booking) {
 
         hitungHarga(booking);

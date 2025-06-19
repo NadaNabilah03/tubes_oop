@@ -18,10 +18,10 @@ public class HistoryBookingController {
     public String getCustomerHistory(@PathVariable Long customerId, Model model) {
         try {
             model.addAttribute("bookings", bookingService.getBookingsByCustomerId(customerId));
-            return "booking-history"; // templates/booking-history.html
+            return "customerHistory";
         } catch (Exception e) {
             model.addAttribute("error", "Gagal mengambil data riwayat.");
-            return "booking-history";
+            return "customerHistory";
         }
     }
 
@@ -30,10 +30,10 @@ public class HistoryBookingController {
     public String getCollectorHistory(@PathVariable Long collectorId, Model model) {
         try {
             model.addAttribute("bookings", bookingService.getBookingsByCollectorId(collectorId));
-            return "collector-history"; // templates/collector-history.html
+            return "collectorHistory"; // templates/collector-history.html
         } catch (Exception e) {
             model.addAttribute("error", "Gagal mengambil data riwayat.");
-            return "collector-history";
+            return "collectorHistory";
         }
     }
 }
