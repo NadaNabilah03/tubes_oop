@@ -12,6 +12,11 @@ import java.util.List;
 @Table(name = "customers")
 public class Customer extends User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customer_id")
+    private Long customerId;
+
     @NotBlank(message = "Nomor HP tidak boleh kosong")
     @Pattern(regexp = "^\\+?\\d{10,15}$", message = "Nomor HP harus valid dan terdiri dari 10-15 digit, bisa diawali +")
     private String phoneNumber;
@@ -34,7 +39,7 @@ public class Customer extends User {
     public Customer(Long id, String username, String email, String password, String phoneNumber,
                     String address, String profilePic,
                     List<HistoryBooking> historyBookings, List<FormulirBooking> formulirBookings) {
-        this.setId(id);
+        this.customerId = id;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -66,6 +71,15 @@ public class Customer extends User {
     }
 
     // Getters & Setters
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }

@@ -85,35 +85,28 @@ public class FormulirBookingController {
         }
     }
 
-    @PostMapping("/cancel/customer/{id}")
-    public String cancelBookingCustomer(@PathVariable Long id) {
-        try {
-            bookingService.cancelBooking(id);
-            return "redirect:/customer/history";
-        } catch (Exception e) {
-            return "redirect:/customer/history?error";
-        }
-    }
-
     @PostMapping("/complete/collector/{id}")
-    public String completeBookingCollector(@PathVariable Long id) {
+    public String completeBookingCollector(@PathVariable Long bookingId,
+                                           @RequestParam Long collectorId) {
         try {
-            bookingService.completeBooking(id);
+            bookingService.completeBooking(bookingId, collectorId);
             return "redirect:/collector/history";
         } catch (Exception e) {
             return "redirect:/collector/history?error";
         }
     }
 
-    @PostMapping("/cancel/collector/{id}")
-    public String cancelBookingCollector(@PathVariable Long id) {
+    @PostMapping("/cancel/collector/{bookingId}")
+    public String cancelBookingCollector(@PathVariable Long bookingId,
+                                         @RequestParam Long collectorId) {
         try {
-            bookingService.cancelBooking(id);
+            bookingService.cancelBooking(bookingId, collectorId);
             return "redirect:/collector/history";
         } catch (Exception e) {
             return "redirect:/collector/history?error";
         }
     }
+
 
 
     @GetMapping("/form")

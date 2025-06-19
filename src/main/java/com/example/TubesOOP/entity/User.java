@@ -11,10 +11,6 @@ import org.springframework.data.annotation.Id;
 @MappedSuperclass
 public abstract class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @NotBlank(message = "Username tidak boleh kosong")
     @Column(unique = true)
     protected String username;
@@ -29,14 +25,6 @@ public abstract class User {
     protected String profilePic;
 
     // Getters & Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;

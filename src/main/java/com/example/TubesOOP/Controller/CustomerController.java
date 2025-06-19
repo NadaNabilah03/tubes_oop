@@ -37,7 +37,14 @@ public class CustomerController {
     @PostMapping("/register")
     public String registerCustomer(@ModelAttribute CustomerRegisterRequest request) {
         try {
-            customerService.registerCustomer(request.getUsername(), request.getEmail(), request.getPassword());
+            customerService.registerCustomer(
+                    request.getUsername(),
+                    request.getEmail(),
+                    request.getPassword(),
+                    request.getUsername(),
+                    request.getAlamat(),
+                    request.getNoTelepon()
+            );
             return "redirect:/login?registered";
         } catch (Exception e) {
             return "redirect:/register?error";

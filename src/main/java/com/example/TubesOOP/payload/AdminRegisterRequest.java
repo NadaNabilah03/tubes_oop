@@ -17,6 +17,8 @@ public class AdminRegisterRequest {
     @Size(min = 6, message = "Password minimal 6 karakter")
     private String password;
 
+    private String profilePic;
+
     // Getter & Setter
     public String getUsername() {
         return username;
@@ -35,5 +37,13 @@ public class AdminRegisterRequest {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
     }
 }

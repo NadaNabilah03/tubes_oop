@@ -12,6 +12,11 @@ import java.util.List;
 @Table(name = "collectors")
 public class Collector extends User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "collector_id")
+    private Long collectorId;
+
     @NotBlank(message = "Nomor HP tidak boleh kosong")
     private String phoneNumber;
 
@@ -28,6 +33,14 @@ public class Collector extends User {
     @OneToMany(mappedBy = "collector", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<FormulirBooking> formulirBookings = new ArrayList<>();
+
+    public Long getCollectorId() {
+        return collectorId;
+    }
+
+    public void setCollectorId(Long collectorId) {
+        this.collectorId = collectorId;
+    }
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -85,7 +98,7 @@ public class Collector extends User {
             List<HistoryBooking> historyHandled,
             List<FormulirBooking> formulirBookings
     ) {
-        this.setId(id);
+        this.collectorId = id;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -96,4 +109,5 @@ public class Collector extends User {
         this.historyHandled = historyHandled;
         this.formulirBookings = formulirBookings;
     }
+
 }

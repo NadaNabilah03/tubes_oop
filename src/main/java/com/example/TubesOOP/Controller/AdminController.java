@@ -42,12 +42,18 @@ public class AdminController {
     @PostMapping("/register")
     public String registerAdmin(@ModelAttribute AdminRegisterRequest request) {
         try {
-            adminService.registerAdmin(request.getUsername(), request.getEmail(), request.getPassword());
+            adminService.registerAdmin(
+                    request.getUsername(),
+                    request.getEmail(),
+                    request.getPassword(),
+                    request.getProfilePic()
+            );
             return "redirect:/login?registered";
         } catch (Exception e) {
             return "redirect:/register?error";
         }
     }
+
 
     @GetMapping("/register")
     public String showRegisterForm() {

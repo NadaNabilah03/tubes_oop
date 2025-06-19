@@ -39,7 +39,7 @@ public class CollectorController {
     public String registerCollector(@ModelAttribute CollectorRegisterRequest request) {
         try {
             collectorService.registerCollector(
-                    request.getName(),
+                    request.getUsername(),
                     request.getUsername(),
                     request.getEmail(),
                     request.getPassword(),

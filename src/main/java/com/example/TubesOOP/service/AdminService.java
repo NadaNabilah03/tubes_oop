@@ -31,7 +31,7 @@ public class AdminService {
         return admin.get();
     }
 
-    public void registerAdmin(String username, String email, String password) throws Exception {
+    public void registerAdmin(String username, String email, String password, String profilePic) throws Exception {
         if (adminRepository.existsByEmail(email)) {
             throw new Exception("Email already used");
         }
@@ -44,8 +44,12 @@ public class AdminService {
         admin.setUsername(username);
         admin.setEmail(email);
         admin.setPassword(passwordEncoder.encode(password));
+        admin.setProfilePic(profilePic);  // ← TAMBAHKAN ini
+
         adminRepository.save(admin);
     }
+
+
 
     public AdminInfoResponse getAdminInfo(String email) throws Exception {
         Admin admin = findAdminByEmail(email); // pake method yg udah ada
