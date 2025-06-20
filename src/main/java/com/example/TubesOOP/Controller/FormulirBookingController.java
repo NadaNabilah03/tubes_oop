@@ -2,6 +2,7 @@ package com.example.TubesOOP.Controller;
 
 import com.example.TubesOOP.entity.Customer;
 import com.example.TubesOOP.enums.BookingStatus;
+import com.example.TubesOOP.enums.WasteType;
 import com.example.TubesOOP.payload.BookingRequest;
 import com.example.TubesOOP.payload.BookingResponse;
 import com.example.TubesOOP.payload.AssignBookingRequest;
@@ -33,12 +34,13 @@ public class FormulirBookingController {
         try {
             Long customerId = Long.parseLong(request.getCustomerId());
             bookingService.createBooking(
-                    request.getJenisSampah(),
+                    customerId,
+                    WasteType.valueOf(request.getJenisSampah().toUpperCase()),
                     request.getBeratSampah(),
                     LocalDate.parse(request.getTanggalPickup()),
-                    LocalTime.parse(request.getJamPickup()),
-                    customerId
+                    LocalTime.parse(request.getJamPickup())
             );
+
 
             return "redirect:/customerHistory";
         } catch (Exception e) {

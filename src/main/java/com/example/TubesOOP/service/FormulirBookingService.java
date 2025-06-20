@@ -38,10 +38,10 @@ public class FormulirBookingService {
     }
 
     // Tambah booking baru
-    public FormulirBooking createBooking(String customerId, String jenisSampah,
-                                         LocalDate beratSampah, LocalTime tanggalPickup,
-                                         Long jamPickup) {
-        // Validate customer ID
+    public FormulirBooking createBooking(Long customerId, WasteType jenisSampah,
+                                         Double beratSampah, LocalDate tanggalPickup,
+                                         LocalTime jamPickup)
+    {
         if (customerId == null) {
             throw new IllegalArgumentException("Customer ID cannot be null");
         }
