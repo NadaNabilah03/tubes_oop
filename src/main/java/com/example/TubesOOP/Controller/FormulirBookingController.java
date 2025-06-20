@@ -1,8 +1,6 @@
 package com.example.TubesOOP.Controller;
 
 import com.example.TubesOOP.entity.Customer;
-import com.example.TubesOOP.entity.FormulirBooking;
-import com.example.TubesOOP.enums.WasteType;
 import com.example.TubesOOP.enums.BookingStatus;
 import com.example.TubesOOP.payload.BookingRequest;
 import com.example.TubesOOP.payload.BookingResponse;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/booking")
@@ -32,20 +31,20 @@ public class FormulirBookingController {
     @PostMapping("/customer/create")
     public String createBooking(@ModelAttribute BookingRequest request) {
         try {
-            WasteType jenis = WasteType.valueOf(request.getJenisSampah());
-            Double berat = Double.parseDouble(request.getBeratSampah());
-            LocalDate tanggal = LocalDate.parse(request.getTanggalPickup());
-            LocalTime jam = LocalTime.parse(request.getJamPickup());
             Long customerId = Long.parseLong(request.getCustomerId());
+            bookingService.createBooking(
+                    request.getJenisSampah(),
+                    request.getBeratSampah(),
+                    LocalDate.parse(request.getTanggalPickup()),
+                    LocalTime.parse(request.getJamPickup()),
+                    customerId
+            );
 
-            bookingService.createBooking(jenis, berat, tanggal, jam, customerId);
-            return "redirect:/customer/history";
+            return "redirect:/customerHistory";
         } catch (Exception e) {
-            e.printStackTrace(); // biar keliatan error detailnya
-            return "redirect:/booking/form?error";
+            return "redirect:/form?error";
         }
     }
-
 
 
     @GetMapping("/customer/{id}")
@@ -114,16 +113,15 @@ public class FormulirBookingController {
         }
     }
 
-    @Autowired
     @GetMapping("/form")
     public String showBookingForm(@CookieValue(value = "userCookie", defaultValue = "") String email, Model model) {
-        Customer customer = customerRepository.findByEmail(email);
-        if (customer != null) {
-            model.addAttribute("customerId", customer.getCustomerId());
+        Optional<Customer> customer = customerRepository.findByEmail(email);
+        if (customer.isPresent()) {
+            model.addAttribute("customerId", customer.get().getCustomerId());
+            return "form";
         } else {
-            model.addAttribute("customerId", null); // atau redirect ke login
+            return "redirect:/login"; // atau page error
         }
-        return "form";
     }
 
 

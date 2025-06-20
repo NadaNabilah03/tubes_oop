@@ -1,13 +1,11 @@
 package com.example.TubesOOP.payload;
 
-import com.example.TubesOOP.enums.WasteType;
-
 public class BookingRequest {
     private String jenisSampah;      // akan di-convert manual ke WasteType
     private String beratSampah;      // convert manual ke Double
     private String tanggalPickup;    // convert ke LocalDate
     private String jamPickup;        // convert ke LocalTime
-    private Long customerId;       // convert ke Long
+    private String customerId;       // convert ke Long
 
     // getter-setter
 
@@ -44,11 +42,11 @@ public class BookingRequest {
         this.jamPickup = jamPickup;
     }
 
-    public Long getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Long customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 }

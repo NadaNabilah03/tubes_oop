@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,9 +38,9 @@ public class FormulirBookingService {
     }
 
     // Tambah booking baru
-    public FormulirBooking createBooking(Long customerId, WasteType jenisSampah,
-                                         Double beratSampah, LocalDate tanggalPickup,
-                                         LocalTime jamPickup) {
+    public FormulirBooking createBooking(String customerId, String jenisSampah,
+                                         LocalDate beratSampah, LocalTime tanggalPickup,
+                                         Long jamPickup) {
         // Validate customer ID
         if (customerId == null) {
             throw new IllegalArgumentException("Customer ID cannot be null");
