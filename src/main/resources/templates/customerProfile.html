@@ -47,9 +47,29 @@
         <div class="profile-container">
             <div class="profile-card">
                 <div class="profile-info">
-                    <p><strong>Username:</strong> <span th:text="${admin.username}">adminusername</span></p>
-                    <p><strong>Email:</strong> <span th:text="${admin.email}">admin@email.com</span></p>
-                    <p><strong>Password:</strong> ********</p>
+                    <table class="profile-table">
+                        <tr>
+                            <th>Field</th>
+                            <th>Informasi</th>
+                        </tr>
+                        <tr>
+                            <td>Username</td>
+                            <td th:text="${customer.username}">defaultusername</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td th:text="${customer.email}">defaultemail</td>
+                        </tr>
+                        <tr>
+                            <td>No. HP</td>
+                            <td th:text="${customer.phoneNumber}">0812xxxx</td>
+                        </tr>
+                        <tr>
+                            <td>Alamat</td>
+                            <td th:text="${customer.address}">Jl. Contoh</td>
+                        </tr>
+                    </table>
+
                 </div>
             </div>
         </div>

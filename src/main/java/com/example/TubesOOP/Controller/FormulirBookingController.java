@@ -44,7 +44,7 @@ public class FormulirBookingController {
 
             return "redirect:/customerHistory";
         } catch (Exception e) {
-            return "redirect:/form?error";
+            return "redirect:/customer/form?error";
         }
     }
 

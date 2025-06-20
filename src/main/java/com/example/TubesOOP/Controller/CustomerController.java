@@ -63,22 +63,20 @@ public class CustomerController {
     }
 
     @GetMapping("/profile")
-    public String getCustomerInfo(@CookieValue(value = "userCookie", defaultValue = "") String email, Model model) {
-        System.out.println("Cookie userCookie: " + email); // DEBUG
+    public String getCustomerInfo(HttpSession session, Model model) {
+        CustomerResponse customer = (CustomerResponse) session.getAttribute("loggedInCustomer");
 
-        if (email.isEmpty()) {
+        System.out.println("DEBUG /profile - session.loggedInCustomer = " + customer);
+
+        if (customer == null) {
             return "redirect:/customer/login?unauthorized";
         }
 
-        try {
-            Customer customer = customerService.findCustomerByEmail(email); // Ganti method pencarian
-            CustomerResponse response = customerService.convertToResponse(customer);
-            model.addAttribute("customer", response);
-            return "customerProfile";
-        } catch (Exception e) {
-            return "redirect:/customer/login?unauthorized";
-        }
+        model.addAttribute("customer", customer);
+        return "customerProfile";
     }
+
+
 
 
     @GetMapping("/about")
