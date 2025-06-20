@@ -1,12 +1,17 @@
 package com.example.TubesOOP.Controller;
 
 import com.example.TubesOOP.entity.Collector;
+import com.example.TubesOOP.entity.Customer;
 import com.example.TubesOOP.payload.collector.CollectorLoginRequest;
 import com.example.TubesOOP.payload.collector.CollectorRegisterRequest;
 import com.example.TubesOOP.payload.collector.CollectorResponse;
+import com.example.TubesOOP.payload.customer.CustomerLoginRequest;
+import com.example.TubesOOP.payload.customer.CustomerResponse;
 import com.example.TubesOOP.service.CollectorService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -17,16 +22,18 @@ public class CollectorController {
     private CollectorService collectorService;
 
     @PostMapping("/login")
-    public String loginCollector(@ModelAttribute CollectorLoginRequest request) {
+    public String loginCustomer(@ModelAttribute CollectorLoginRequest request, HttpSession session) {
         try {
             Collector collector = collectorService.authenticateCollector(
                     request.getEmail(), request.getPassword()
             );
-            // Login berhasil, redirect ke dashboard collector
-            return "redirect:/home";
+            CollectorResponse response = collectorService.convertToResponse(collector);
+
+            session.setAttribute("loggedInCollector", response);
+
+            return "redirect:/collector/home";
         } catch (Exception e) {
-            // Login gagal, redirect ke login page dengan error
-            return "redirect:/login?error";
+            return "redirect:/collector/login?error";
         }
     }
 
@@ -46,11 +53,10 @@ public class CollectorController {
                     request.getAddress(),
                     request.getProfilePic()
             );
-            // Registrasi berhasil, redirect ke login
-            return "redirect:/login?registered";
+            return "redirect:/collector/login?registered=true";
         } catch (Exception e) {
-            // Registrasi gagal, kembali ke register
-            return "redirect:/register?error";
+            e.printStackTrace();
+            return "redirect:/collector/register?error";
         }
     }
 
@@ -60,15 +66,17 @@ public class CollectorController {
     }
 
     @GetMapping("/profile")
-    public String getCollectorInfo(@PathVariable String email) {
-        try {
-            Collector collector = collectorService.findCollectorByEmail(email);
-            CollectorResponse response = collectorService.convertToResponse(collector);
-            // Redirect ke halaman profil collector
-            return "redirect:/collectorProfile";
-        } catch (Exception e) {
-            return "redirect:/error";
+    public String getCollectorInfo(HttpSession session, Model model) {
+        CollectorResponse collector = (CollectorResponse) session.getAttribute("loggedInCollector");
+
+        System.out.println("DEBUG /profile - session.loggedInCustomer = " + collector);
+
+        if (collector == null) {
+            return "redirect:/customer/login?unauthorized";
         }
+
+        model.addAttribute("customer", collector);
+        return "customerProfile";
     }
 
     @GetMapping("/about")

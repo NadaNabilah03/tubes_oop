@@ -51,6 +51,12 @@ public class CollectorService {
         collector.setAddress(address);
         collector.setProfilePic(profilePic);
 
+        if (profilePic == null || profilePic.isEmpty()) {
+            collector.setProfilePic("/image/avatar.jpg");
+        } else {
+            collector.setProfilePic(profilePic);
+        }
+
         return collectorRepository.save(collector);
     }
 
