@@ -5,8 +5,10 @@ import com.example.TubesOOP.payload.customer.CustomerLoginRequest;
 import com.example.TubesOOP.payload.customer.CustomerRegisterRequest;
 import com.example.TubesOOP.payload.customer.CustomerResponse;
 import com.example.TubesOOP.service.CustomerService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -17,17 +19,21 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping("/login")
-    public String loginCustomer(@ModelAttribute CustomerLoginRequest request) {
+    public String loginCustomer(@ModelAttribute CustomerLoginRequest request, HttpSession session) {
         try {
             Customer customer = customerService.authenticateCustomer(
                     request.getEmail(), request.getPassword()
             );
             CustomerResponse response = customerService.convertToResponse(customer);
-            return "redirect:/customerHome";
+
+            session.setAttribute("loggedInCustomer", response);
+
+            return "redirect:/customer/home";
         } catch (Exception e) {
-            return "redirect:/login?error";
+            return "redirect:/customer/login?error";
         }
     }
+
 
     @GetMapping("/login")
     public String showLoginForm() {
@@ -45,9 +51,9 @@ public class CustomerController {
                     request.getPhoneNumber(),
                     null
             );
-            return "redirect:/login?registered";
+            return "redirect:/customer/login?registered=true";
         } catch (Exception e) {
-            return "redirect:/register?error";
+            return "redirect:/customer/register?error";
         }
     }
 
@@ -56,16 +62,24 @@ public class CustomerController {
         return "customerRegister";
     }
 
-    @GetMapping("/{username}")
-    public String getCustomerInfo(@PathVariable String username) {
+    @GetMapping("/profile")
+    public String getCustomerInfo(@CookieValue(value = "userCookie", defaultValue = "") String email, Model model) {
+        System.out.println("Cookie userCookie: " + email); // DEBUG
+
+        if (email.isEmpty()) {
+            return "redirect:/customer/login?unauthorized";
+        }
+
         try {
-            Customer customer = customerService.findCustomerByUsername(username);
+            Customer customer = customerService.findCustomerByEmail(email); // Ganti method pencarian
             CustomerResponse response = customerService.convertToResponse(customer);
-            return "redirect:/customerProfile";
+            model.addAttribute("customer", response);
+            return "customerProfile";
         } catch (Exception e) {
-            return "redirect:/error";
+            return "redirect:/customer/login?unauthorized";
         }
     }
+
 
     @GetMapping("/about")
     public String aboutPage() {
@@ -73,12 +87,59 @@ public class CustomerController {
     }
 
     @GetMapping("/home")
-    public String homePage() {
+    public String homePage(HttpSession session, Model model) {
+        CustomerResponse customer = (CustomerResponse) session.getAttribute("loggedInCustomer");
+
+        if (customer == null) {
+            return "redirect:/customer/login"; // belum login
+        }
+
+        model.addAttribute("customer", customer); // lempar ke HTML
         return "customerHome";
     }
+
 
     @GetMapping("/history")
     public String historyPage() {
         return "customerHistory";
     }
+
+    @GetMapping("/form")
+    public String showCustomerForm(HttpSession session, Model model) {
+        CustomerResponse customer = (CustomerResponse) session.getAttribute("loggedInCustomer");
+
+        if (customer == null) {
+            return "redirect:/customer/login";
+        }
+
+        model.addAttribute("customer", customer);
+        return "form"; // file HTML-nya: customerForm.html
+    }
+
+    @PostMapping("/formSubmit")
+    public String submitCustomerForm(@ModelAttribute CustomerResponse request, HttpSession session) {
+        try {
+            CustomerResponse current = (CustomerResponse) session.getAttribute("loggedInCustomer");
+
+            if (current == null) {
+                return "redirect:/customer/login";
+            }
+
+            // Update data di database
+            customerService.updateCustomer(
+                    current.getId(),
+                    request.getUsername(),
+                    request.getEmail(),
+                    request.getPhoneNumber(),
+                    request.getAddress()
+            );
+
+            session.setAttribute("loggedInCustomer", request);
+
+            return "redirect:/customer/profile?updated";
+        } catch (Exception e) {
+            return "redirect:/customer/form?error";
+        }
+    }
+
 }

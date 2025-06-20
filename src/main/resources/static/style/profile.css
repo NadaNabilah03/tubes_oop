@@ -363,4 +363,28 @@
     padding: 8px 12px;
     font-size: 12px;
   }
+
+  .profile-card {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background: #f9f9f9;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-pic img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #4caf50;
+  }
+
+  .profile-info p {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+  }
+
 }

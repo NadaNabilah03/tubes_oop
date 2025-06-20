@@ -23,6 +23,10 @@
 
         <h2>Please Login Your Customer Account</h2>
 
+        <div th:if="${param.registered}" class="popup-success">
+            <p>Akun Anda berhasil didaftarkan! Silakan login.</p>
+        </div>
+
         <form class="auth-form" th:action="@{/customer/login}" method="post">
             <!-- Form fields -->
             <div class="form-group">
@@ -42,6 +46,10 @@
 
             <button type="submit" class="btn-auth">Sign in</button>
         </form>
+
+        <div th:if="${param.error}" class="form-error">
+            <p class="error-message">Login failed. Email/password may be wrong or not registered.</p>
+        </div>
 
         <div class="auth-footer">
             <p>Didn't have an Account? <a th:href="@{/customer/register}">Sign-up</a></p>

@@ -1,12 +1,11 @@
 package com.example.TubesOOP.entity;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Id;
+
 
 @MappedSuperclass
 public abstract class User {
@@ -17,6 +16,7 @@ public abstract class User {
 
     @NotBlank(message = "Email tidak boleh kosong")
     @Email(message = "Format email harus valid")
+    @Column(unique = true)
     protected String email;
 
     @NotBlank(message = "Password tidak boleh kosong")

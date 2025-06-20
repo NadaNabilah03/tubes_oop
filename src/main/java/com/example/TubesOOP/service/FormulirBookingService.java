@@ -39,25 +39,35 @@ public class FormulirBookingService {
     }
 
     // Tambah booking baru
-    public void createBooking(WasteType jenisSampah, Double beratSampah,
-                              LocalDate tanggalPickup, LocalTime jamPickup,
-                              Long customerId) throws Exception {
-
-        Optional<Customer> customer = customerRepository.findById(customerId);
-        if (!customer.isPresent()) {
-            throw new Exception("createBooking.Customer not found");
+    public FormulirBooking createBooking(Long customerId, WasteType jenisSampah,
+                                         Double beratSampah, LocalDate tanggalPickup,
+                                         LocalTime jamPickup) {
+        // Validate customer ID
+        if (customerId == null) {
+            throw new IllegalArgumentException("Customer ID cannot be null");
         }
 
-        FormulirBooking booking = new FormulirBooking();
-        booking.setJenisSampah(jenisSampah);
-        booking.setBeratSampah(beratSampah);
-        booking.setHarga(hitungHarga(beratSampah));
-        booking.setTanggalPickup(tanggalPickup);
-        booking.setJamPickup(jamPickup);
-        booking.setStatus(BookingStatus.MENUNGGU);
-        booking.setCustomer(customer.get());
+        // Find customer
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
 
-        bookingRepository.save(booking);
+        // Create new booking
+        FormulirBooking newBooking = new FormulirBooking();
+        newBooking.setCustomer(customer);
+        newBooking.setJenisSampah(jenisSampah);
+        newBooking.setBeratSampah(beratSampah);
+        newBooking.setTanggalPickup(tanggalPickup);
+        newBooking.setJamPickup(jamPickup);
+
+        // Calculate price
+        newBooking.setHarga(calculatePrice(beratSampah, jenisSampah));
+
+        return bookingRepository.save(newBooking);
+    }
+
+    private Double calculatePrice(Double berat, WasteType jenis) {
+        // Your pricing logic here
+        return berat * (jenis == WasteType.ORGANIK ? 5000 : 7000);
     }
 
     // Ambil semua booking

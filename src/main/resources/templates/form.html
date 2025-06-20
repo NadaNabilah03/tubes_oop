@@ -4,20 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TrashGo - Form Pick Up</title>
-
-    <!-- CSS -->
     <link th:href="@{/style/style.css}" rel="stylesheet" />
     <link th:href="@{/style/mobile.css}" rel="stylesheet" />
     <link th:href="@{/style/form.css}" rel="stylesheet" />
-
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-
 </head>
 
 <body>
-<!-- Header sama dengan template sebelumnya -->
 <header>
     <div class="container">
         <div class="logo">
@@ -33,7 +26,7 @@
                 <li><a th:href="@{/customer/home}">Home</a></li>
                 <li><a th:href="@{/customer/history}">History</a></li>
                 <li><a th:href="@{/customer/about}">About Us</a></li>
-                <li><a th:href="@{/customer/{email}(email=${userEmail})}">Profile</a></li>
+                <li><a th:href="@{/customer/profile}">Profile</a></li>
                 <li><a th:href="@{/customer/login}">Logout</a></li>
             </ul>
         </nav>
@@ -44,60 +37,120 @@
     <div class="container">
         <h2>Form pick up</h2>
 
-        <form id="pickupForm" th:action="@{/api/booking/create}" method="post">
-            <div class="form-group">
-                <label for="nama">Nama</label>
-                <input type="text" id="nama" name="nama" required />
-            </div>
+        <div th:if="${param.error}" class="error-msg">
+            <p>Terjadi kesalahan saat memproses form. Silakan coba lagi.</p>
+        </div>
 
-            <div class="form-group">
-                <label for="telepon">Nomor telpon</label>
-                <input type="text" id="telepon" name="telepon" required />
-            </div>
+        <div class="form-container">
+            <form id="pickupForm" th:action="@{/booking/customer/create}" method="post">
 
-            <div class="form-group">
-                <label for="alamat">Alamat</label>
-                <input type="text" id="alamat" name="alamat" required />
-            </div>
+                <input type="hidden" name="customerId" th:value="${customerId}" />
 
-            <div class="form-group">
-                <label>Jenis sampah</label>
-                <div class="radio-group">
-                    <label><input type="radio" name="jenisSampah" value="Organik" required /> Organik</label>
-                    <label><input type="radio" name="jenisSampah" value="Non-organik" /> Non-organik</label>
+                <!-- Nama -->
+                <div class="form-group">
+                    <label for="nama">Nama</label>
+                    <input type="text" id="nama" name="nama" required />
                 </div>
-            </div>
 
-            <div class="form-group berat-group">
-                <label>Masukkan berat sampah</label>
-                <div class="berat-wrapper">
-                    <input type="number" id="berat" name="beratSampah" placeholder="Kg" required />
-                    <span class="berat-arrow">></span>
-                    <input type="text" id="harga" name="harga" placeholder="Rp" readonly />
+                <!-- Nomor Telepon -->
+                <div class="form-group">
+                    <label for="telpon">Nomor telpon</label>
+                    <input type="tel" id="telpon" name="telpon" required />
                 </div>
-            </div>
 
-            <div class="form-group tanggal-group">
-                <label>Tanggal</label>
-                <div class="tanggal-wrapper">
-                    <input type="text" name="tanggal" placeholder="dd" maxlength="2" required />
-                    <span>/</span>
-                    <input type="text" name="bulan" placeholder="mm" maxlength="2" required />
-                    <span>/</span>
-                    <input type="text" name="tahun" placeholder="yy" maxlength="4" required />
+                <!-- Alamat -->
+                <div class="form-group">
+                    <label for="alamat">Alamat</label>
+                    <input type="text" id="alamat" name="alamat" required />
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label for="jam">Masukkan jam pick up</label>
-                <input type="time" id="jam" name="jam" required />
-            </div>
+                <!-- Jenis sampah -->
+                <div class="form-group">
+                    <label>Jenis sampah</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input
+                                    type="radio"
+                                    id="organik"
+                                    name="jenisSampah"
+                                    value="ORGANIK"
+                                    checked
+                            />
+                            <label for="organik">Organik</label>
+                        </div>
+                        <div class="radio-option">
+                            <input
+                                    type="radio"
+                                    id="nonorganik"
+                                    name="jenisSampah"
+                                    value="NON_ORGANIK"
+                            />
+                            <label for="nonorganik">Non-organik</label>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="form-submit">
-                <button type="submit" class="btn-submit">Send</button>
-            </div>
-        </form>
 
+                <!-- Berat Sampah -->
+                <div class="form-group">
+                    <label>Masukkan berat sampah</label>
+                    <div class="weight-price-group">
+                        <input type="number" id="berat" name="beratSampah" placeholder="Kg" required />
+                        <div class="arrow-icon">→</div>
+                        <input type="text" id="harga" name="harga" placeholder="Rp" readonly />
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="date-group">
+                        <div class="date-field">
+                            <label for="tanggal">Tanggal</label>
+                            <input
+                                    type="text"
+                                    id="tanggal"
+                                    name="tanggal"
+                                    placeholder="dd"
+                                    required
+                            />
+                        </div>
+                        <div class="date-separator">/</div>
+                        <div class="date-field">
+                            <label for="bulan">Bulan</label>
+                            <input
+                                    type="text"
+                                    id="bulan"
+                                    name="bulan"
+                                    placeholder="mm"
+                                    required
+                            />
+                        </div>
+                        <div class="date-separator">/</div>
+                        <div class="date-field">
+                            <label for="tahun">Tahun</label>
+                            <input
+                                    type="text"
+                                    id="tahun"
+                                    name="tahun"
+                                    placeholder="yy"
+                                    required
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" id="tanggalPickup" name="tanggalPickup" />
+
+                <div class="form-group">
+                    <label for="jam">Masukkan jam pick up</label>
+                    <input type="time" id="jam" name="jamPickup" required />
+                </div>
+
+                <div class="form-submit">
+                    <button type="submit" class="btn-submit">Send</button>
+                </div>
+            </form>
+        </div>
     </div>
 </section>
 
@@ -108,16 +161,30 @@
 </footer>
 
 <script>
-    // Kalkulasi berat ke harga
-    document.getElementById("berat").addEventListener("input", function() {
-      const weight = parseFloat(this.value) || 0;
-      const price = weight * 5000; // Rp 5.000 per kg
-      document.getElementById("harga").value =
-        price > 0 ? price.toLocaleString("id-ID") : "";
+    document.getElementById("berat").addEventListener("input", function () {
+      const berat = parseFloat(this.value);
+      let harga = 0;
+
+      if (berat > 5) {
+        harga = 5000 + (berat - 5) * 2000;
+      } else if (berat > 0) {
+        harga = 5000;
+      }
+
+      document.getElementById("harga").value = harga.toLocaleString("id-ID");
     });
 
-    // Check authentication
-    checkAuth();
+    document.getElementById("pickupForm").addEventListener("submit", function (e) {
+    const dd = document.getElementById("tanggal").value.padStart(2, '0');
+    const mm = document.getElementById("bulan").value.padStart(2, '0');
+    const yy = document.getElementById("tahun").value;
+
+    if (dd && mm && yy) {
+      const fullDate = `${yy}-${mm}-${dd}`; // contoh: 2025-06-20
+      document.getElementById("tanggalPickup").value = fullDate;
+    }
+  });
 </script>
+
 </body>
 </html>

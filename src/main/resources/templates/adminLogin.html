@@ -6,15 +6,14 @@
   <title>TrashGo - Login</title>
 
   <!-- CSS -->
-  <link th:href="@{/style/style.css}" rel="stylesheet" />
-  <link th:href="@{/style/mobile.css}" rel="stylesheet" />
-  <link th:href="@{/style/auth.css}" rel="stylesheet" />
-
+  <link rel="stylesheet" th:href="@{/style/style.css}" />
+  <link rel="stylesheet" th:href="@{/style/mobile.css}" />
   <link rel="stylesheet" th:href="@{/style/auth.css}" />
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
+
 
 <body class="auth-body">
 <div class="auth-container">
@@ -24,6 +23,10 @@
     </div>
 
     <h2>Please Login Your Admin Account</h2>
+
+    <div th:if="${param.registered}" class="popup-success">
+      <p>Akun Anda berhasil didaftarkan! Silakan login.</p>
+    </div>
 
     <form class="auth-form" th:action="@{/admin/login}" method="post">
       <!-- Form fields -->
@@ -44,6 +47,10 @@
 
       <button type="submit" class="btn-auth">Sign in</button>
     </form>
+
+    <div th:if="${param.error}" class="form-error">
+      <p class="error-message">Login failed. Email/password may be wrong or not registered.</p>
+    </div>
 
     <div class="auth-footer">
       <p>Didn't have an Account? <a th:href="@{/admin/register}">Sign-up</a></p>

@@ -28,7 +28,7 @@ public class Collector extends User {
 
     @OneToMany(mappedBy = "collector", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<HistoryBooking> historyHandled = new ArrayList<>();
+    private List<HistoryBooking> historyBookings = new ArrayList<>();
 
     @OneToMany(mappedBy = "collector", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
@@ -106,7 +106,7 @@ public class Collector extends User {
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.active = active;
-        this.historyHandled = historyHandled;
+        this.historyBookings = historyHandled;
         this.formulirBookings = formulirBookings;
     }
 

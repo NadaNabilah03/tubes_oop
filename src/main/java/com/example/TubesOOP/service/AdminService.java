@@ -47,6 +47,8 @@ public class AdminService {
         admin.setPassword(passwordEncoder.encode(password));
         admin.setProfilePic(profilePic);
 
+        adminRepository.save(admin);
+
         return new AdminRegisterResponse(
                 admin.getAdminId(),
                 admin.getUsername(),
@@ -54,6 +56,7 @@ public class AdminService {
                 admin.getProfilePic()
         );
     }
+
 
 
 

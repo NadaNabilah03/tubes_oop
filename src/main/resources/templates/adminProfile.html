@@ -31,7 +31,7 @@
         <nav id="mobileNav">
             <ul>
                 <li><a th:href="@{/admin/about}">About Us</a></li>
-                <li><a th:href="@{/admin/{email}(email=${userEmail})}" class="active">Profile</a></li>
+                <li><a th:href="@{/admin/profile}" class="active">Profile</a></li>
                 <li><a th:href="@{/admin/dashboard}">Dashboard</a></li>
                 <li><a th:href="@{/admin/login}">Logout</a></li>
             </ul>
@@ -44,14 +44,20 @@
     <div class="container">
         <h2>Profile</h2>
         <div class="profile-container">
-            <!-- Profile content -->
+            <div class="profile-card">
+                <div class="profile-info">
+                    <p><strong>Username:</strong> <span th:text="${admin.username}">adminusername</span></p>
+                    <p><strong>Email:</strong> <span th:text="${admin.email}">admin@email.com</span></p>
+                    <p><strong>Password:</strong> ********</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
 <footer>
     <div class="container">
-        <p>&copy; 2023 TrashGo. All rights reserved.</p>
+        <p>&copy; 2025 TrashGo. All rights reserved.</p>
     </div>
 </footer>
 

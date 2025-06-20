@@ -3,26 +3,28 @@ package com.example.TubesOOP.payload;
 import com.example.TubesOOP.enums.WasteType;
 
 public class BookingRequest {
-    private WasteType jenisSampah;
-    private Double beratSampah;
-    private String tanggalPickup;
-    private String jamPickup;
-    private Long customerId;
+    private String jenisSampah;      // akan di-convert manual ke WasteType
+    private String beratSampah;      // convert manual ke Double
+    private String tanggalPickup;    // convert ke LocalDate
+    private String jamPickup;        // convert ke LocalTime
+    private Long customerId;       // convert ke Long
 
-    // Getter & Setter
-    public WasteType getJenisSampah() {
+    // getter-setter
+
+
+    public String getJenisSampah() {
         return jenisSampah;
     }
 
-    public void setJenisSampah(WasteType jenisSampah) {
+    public void setJenisSampah(String jenisSampah) {
         this.jenisSampah = jenisSampah;
     }
 
-    public Double getBeratSampah() {
+    public String getBeratSampah() {
         return beratSampah;
     }
 
-    public void setBeratSampah(Double beratSampah) {
+    public void setBeratSampah(String beratSampah) {
         this.beratSampah = beratSampah;
     }
 
@@ -50,3 +52,4 @@ public class BookingRequest {
         this.customerId = customerId;
     }
 }
+

@@ -17,9 +17,6 @@ public class CustomerRegisterRequest {
     @Size(min = 6, message = "Password minimal 6 karakter")
     private String password;
 
-    @NotBlank(message = "Nama tidak boleh kosong")
-    private String nama;
-
     @NotBlank(message = "Alamat tidak boleh kosong")
     private String address;
 

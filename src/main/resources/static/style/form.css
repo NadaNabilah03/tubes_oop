@@ -174,4 +174,15 @@
   .form-submit {
     text-align: center;
   }
+
+  .error-msg {
+      background-color: #ffdddd;
+      border-left: 6px solid #f44336;
+      padding: 10px 20px;
+      margin-bottom: 20px;
+      font-weight: 500;
+      color: #b30000;
+      border-radius: 5px;
+  }
+
 }

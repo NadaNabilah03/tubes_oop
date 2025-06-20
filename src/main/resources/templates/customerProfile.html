@@ -33,7 +33,7 @@
                 <li><a th:href="@{/customer/home}">Home</a></li>
                 <li><a th:href="@{/customer/history}">History</a></li>
                 <li><a th:href="@{/customer/about}">About Us</a></li>
-                <li><a th:href="@{/customer/{email}(email=${userEmail})}" class="active">Profile</a></li>
+                <li><a th:href="@{/customer/profile}" class="active">Profile</a></li>
                 <li><a th:href="@{/customer/login}">Logout</a></li>
             </ul>
         </nav>
@@ -45,7 +45,13 @@
     <div class="container">
         <h2>Profile</h2>
         <div class="profile-container">
-            <!-- Profile content -->
+            <div class="profile-card">
+                <div class="profile-info">
+                    <p><strong>Username:</strong> <span th:text="${admin.username}">adminusername</span></p>
+                    <p><strong>Email:</strong> <span th:text="${admin.email}">admin@email.com</span></p>
+                    <p><strong>Password:</strong> ********</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>

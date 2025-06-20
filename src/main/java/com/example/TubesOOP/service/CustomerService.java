@@ -65,13 +65,40 @@ public class CustomerService {
         Customer newCustomer = new Customer(
                 username,
                 email,
-                password,
+                passwordEncoder.encode(password),
                 phoneNumber,
                 address,
                 profilePic != null ? profilePic : "/image/avatar.jpg"
         );
 
         repository.save(newCustomer);
+    }
+
+    // Update data customer
+    public void updateCustomer(Long id, String username, String email, String phoneNumber, String address) throws Exception {
+        Optional<Customer> optionalCustomer = repository.findById(id);
+
+        if (!optionalCustomer.isPresent()) {
+            throw new Exception("updateCustomer.Customer not found");
+        }
+
+        Customer customer = optionalCustomer.get();
+
+        // Update data
+        customer.setUsername(username);
+        customer.setEmail(email);
+        customer.setPhoneNumber(phoneNumber);
+        customer.setAddress(address);
+
+        repository.save(customer); // Simpan perubahan
+    }
+
+    public Customer findCustomerByEmail(String email) throws Exception {
+        Optional<Customer> customer = repository.findByEmail(email);
+        if (!customer.isPresent()) {
+            throw new Exception("Customer not found");
+        }
+        return customer.get();
     }
 
 }

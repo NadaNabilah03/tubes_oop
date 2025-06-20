@@ -1,11 +1,13 @@
 package com.example.TubesOOP.Controller;
 
+import com.example.TubesOOP.entity.Customer;
 import com.example.TubesOOP.entity.FormulirBooking;
 import com.example.TubesOOP.enums.WasteType;
 import com.example.TubesOOP.enums.BookingStatus;
 import com.example.TubesOOP.payload.BookingRequest;
 import com.example.TubesOOP.payload.BookingResponse;
 import com.example.TubesOOP.payload.AssignBookingRequest;
+import com.example.TubesOOP.repository.CustomerRepository;
 import com.example.TubesOOP.service.FormulirBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,21 +26,26 @@ public class FormulirBookingController {
     @Autowired
     private FormulirBookingService bookingService;
 
+    @Autowired
+    private CustomerRepository customerRepository;
+
     @PostMapping("/customer/create")
     public String createBooking(@ModelAttribute BookingRequest request) {
         try {
-            bookingService.createBooking(
-                    request.getJenisSampah(),
-                    request.getBeratSampah(),
-                    LocalDate.parse(request.getTanggalPickup()),
-                    LocalTime.parse(request.getJamPickup()),
-                    request.getCustomerId()
-            );
-            return "redirect:/customerHistory";
+            WasteType jenis = WasteType.valueOf(request.getJenisSampah());
+            Double berat = Double.parseDouble(request.getBeratSampah());
+            LocalDate tanggal = LocalDate.parse(request.getTanggalPickup());
+            LocalTime jam = LocalTime.parse(request.getJamPickup());
+            Long customerId = Long.parseLong(request.getCustomerId());
+
+            bookingService.createBooking(jenis, berat, tanggal, jam, customerId);
+            return "redirect:/customer/history";
         } catch (Exception e) {
-            return "redirect:/form?error";
+            e.printStackTrace(); // biar keliatan error detailnya
+            return "redirect:/booking/form?error";
         }
     }
+
 
 
     @GetMapping("/customer/{id}")
@@ -107,11 +114,17 @@ public class FormulirBookingController {
         }
     }
 
-
-
+    @Autowired
     @GetMapping("/form")
-    public String showBookingForm() {
+    public String showBookingForm(@CookieValue(value = "userCookie", defaultValue = "") String email, Model model) {
+        Customer customer = customerRepository.findByEmail(email);
+        if (customer != null) {
+            model.addAttribute("customerId", customer.getCustomerId());
+        } else {
+            model.addAttribute("customerId", null); // atau redirect ke login
+        }
         return "form";
     }
+
 
 }

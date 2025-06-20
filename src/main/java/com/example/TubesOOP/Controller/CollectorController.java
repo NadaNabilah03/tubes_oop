@@ -59,7 +59,7 @@ public class CollectorController {
         return "collectorRegister";
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/profile")
     public String getCollectorInfo(@PathVariable String email) {
         try {
             Collector collector = collectorService.findCollectorByEmail(email);
